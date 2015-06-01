@@ -65,7 +65,7 @@ public class Tools {
 	 * @param nomeFile
 	 * @throws FileNotFoundException 
 	 */
-	public void creaFile(String nomeFile) throws FileNotFoundException{
+	public static void creaFile(String nomeFile) throws FileNotFoundException{
 		File file = new File(nomeFile);
 		
 		if (file.exists())
@@ -88,7 +88,7 @@ public class Tools {
      * @param parola
      * @throws FileNotFoundException
      */
-	public void scriviFile(String nomeFile, String parola) throws FileNotFoundException{
+	public static void scriviFile(String nomeFile, String parola) throws FileNotFoundException{
 		FileOutputStream fos = new FileOutputStream(nomeFile, true);
 		PrintWriter scrivi = new PrintWriter(fos);
 		scrivi.println(parola);

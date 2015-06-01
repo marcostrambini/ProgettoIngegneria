@@ -16,11 +16,6 @@ public class Test {
 		String nomeFile = "libri.txt";
 		String nomeFileCategorie = "categoria.txt";
 		ArrayList<String> arrayLibri = new ArrayList<String>();
-	
-			
-			
-	
-
 		ArrayList<String> arrayCategorie = tools.leggiFileRitorna(nomeFileCategorie);
 		
 		Connection con = null;
@@ -37,7 +32,7 @@ public class Test {
 			for(int i =0; i<arrayCategorie.size();i++){
 				pstm.clearParameters();
 				pstm.setInt(1, (i+1));
-				pstm.setString(2, arrayCategorie.get(i));
+				pstm.setString(2, arrayCategorie.get(i).trim());
 				pstm.execute();
 				System.out.println("inserita categoria: "+arrayCategorie.get(i));
 				
@@ -67,24 +62,18 @@ public class Test {
 			
 			pstm2.clearParameters();
 			pstm2.setInt(1, (i+1));
-			pstm2.setString(2, part1);
-			pstm2.setString(3, part2);
+			pstm2.setString(2, part1.trim());
+			pstm2.setString(3, part2.trim());
 			pstm2.setInt(4, id_cat);
 			pstm2.setString(5, "test");
 			pstm2.setString(6, "A");
 			
 			System.out.println("Inserimento libor: "+part1+" : "+ !	pstm2.execute());
 			
-			
-				
-				
-				
+						
 			}
 			
-			
-			
-			
-			
+					
 			pstm2.close();
 			
 		} catch (ClassNotFoundException e) {
@@ -103,6 +92,10 @@ public class Test {
 			}
 		}
 		
+		
+		System.out.println("Dimensione array indirizzi: "+GestioneNomi.indirizzi.length);
+		for(int i=0;i<10;i++)
+			System.out.println("indirizzo a caso n "+(i+1)+" : "+GestioneNomi.getIndirizzo());
 		
 		
 		
