@@ -62,7 +62,7 @@ facilmente all'interno del web. ">
 	DataSource ds = new DataSource();
 	Connection con = ds.getConnection();
 	PreparedStatement pstm = con.prepareStatement(MyQuery.getqSelectLibriFromUtente());
-	String email = "e.marchetti@mail.com";
+	String email = "r.bianco@libero.it";
 	pstm.setString(1, email);
 	ResultSet rs = pstm.executeQuery();
 	
@@ -81,7 +81,7 @@ facilmente all'interno del web. ">
 			
 					<tr>
 						<td>
-						Nome:
+						Nome: 
 						</td>
 						<td>
 						<%=rs.getString(6)+" "+rs.getString(7) %>
@@ -158,10 +158,10 @@ facilmente all'interno del web. ">
 			
 					<tr>
 						<td>
-						Titolo:
+						Titolo: 
 						</td>
 						<td>
-						<%=rs.getString(2) %>
+						 &nbsp; <%=rs.getString(2) %>
 						</td>
 					</tr>
 					<tr>
@@ -169,7 +169,7 @@ facilmente all'interno del web. ">
 						Autore:
 						</td>
 						<td>
-						<%=rs.getString(4) %>
+						 &nbsp; <%=rs.getString(4) %>
 						</td>
 					</tr>
 					<tr>
@@ -177,7 +177,7 @@ facilmente all'interno del web. ">
 						Categoria:
 						</td>
 						<td>
-						<%=rs.getString(5) %>
+						 &nbsp; <%=rs.getString(5) %>
 						</td>
 					</tr>
 					
