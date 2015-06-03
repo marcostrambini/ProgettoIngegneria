@@ -1,5 +1,4 @@
 Antologia
-Arte
 Autobiografia
 Azione
 Bambini
@@ -26,4 +25,8 @@ Serie
 Storia
 Trilogia
 Viaggio
-Porno
+Fantascienza
+Filosofico
+Commedia
+Arte
+Erotico

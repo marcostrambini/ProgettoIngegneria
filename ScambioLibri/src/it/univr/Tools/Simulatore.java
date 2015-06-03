@@ -31,8 +31,8 @@ public class Simulatore {
 		Tools.clearFile(nomeFile);
 	
 
-		int nUtentiDaCreare = 200; //max 200
-		int maxLibriPerUtente = 2;
+		int nUtentiDaCreare = 50; //max 200
+		int maxLibriPerUtente = 15;
 
 		System.out.println("-----------------------------------------------------------");
 		ArrayList<Utente> listaUtenti = new ArrayList<Utente>();

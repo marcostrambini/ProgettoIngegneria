@@ -324,5 +324,9 @@ public class DataSource implements Serializable {
 	}
 	  
   }
+  
+  static String qSelectLibriFromUtente = " select l.id,l.nome,l.path_img,l.autore,c.nome from ing_libro l join ing_categoria c on l.categoria = c.id " +
+		   " join ing_possessolibro p on p.id_libro = l.id join ing_utente u on u.email =p.email_utente " +
+		   " where l.stato = 'A' and u.email = ?";
 
 }

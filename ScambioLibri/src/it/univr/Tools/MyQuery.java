@@ -12,4 +12,14 @@ public class MyQuery {
 	
 	static String qCountLibri = " select count(*) from ing_libro ";
 	
+	static String qSelectLibriFromUtente = " select l.id,l.nome,l.path_img,l.autore,c.nome,u.nome,u.cognome,u.indirizzo,u.descrizione from ing_libro l join ing_categoria c on l.categoria = c.id " +
+										   " join ing_possessolibro p on p.id_libro = l.id join ing_utente u on u.email =p.email_utente " +
+										   " where l.stato = 'A' and u.email = ?";
+
+	public static String getqSelectLibriFromUtente() {
+		return qSelectLibriFromUtente;
+	}
+	
+
+	
 }

@@ -1,0 +1,501 @@
+
+
+Utente [1] :
+Nome............: Arianna
+Cognome.........: Bianco
+Indirizzo........: Via SAN DALMAZIO Milano
+Mail............: a.bianco@gmail.com
+Password........: password
+Latitudine......: 18
+Longitudine.....: 57
+Stato...........: A
+
+Utente [2] :
+Nome............: Renato
+Cognome.........: Pastore
+Indirizzo........: Via CARLO PORTA Milano
+Mail............: r.pastore@alice.it
+Password........: password
+Latitudine......: 26
+Longitudine.....: 91
+Stato...........: A
+
+Utente [3] :
+Nome............: Sabrina
+Cognome.........: Agostini
+Indirizzo........: Via VASTO Milano
+Mail............: s.agostini@tiscali.it
+Password........: password
+Latitudine......: 14
+Longitudine.....: 41
+Stato...........: A
+
+Utente [4] :
+Nome............: Paola
+Cognome.........: Neri
+Indirizzo........: Via MARINA Milano
+Mail............: p.neri@mail.it
+Password........: password
+Latitudine......: 79
+Longitudine.....: 90
+Stato...........: A
+
+Utente [5] :
+Nome............: Eleonora
+Cognome.........: Marchetti
+Indirizzo........: Via SAN MARCO Milano
+Mail............: e.marchetti@mail.com
+Password........: password
+Latitudine......: 37
+Longitudine.....: 78
+Stato...........: A
+
+Utente [6] :
+Nome............: Dalila
+Cognome.........: Pace
+Indirizzo........: Via STATUTO Milano
+Mail............: d.pace@mail.com
+Password........: password
+Latitudine......: 96
+Longitudine.....: 17
+Stato...........: A
+
+Utente [7] :
+Nome............: Giacomo
+Cognome.........: Galli
+Indirizzo........: Largo RAFFAELE MATTIOLI Milano
+Mail............: g.galli@mail.com
+Password........: password
+Latitudine......: 34
+Longitudine.....: 83
+Stato...........: A
+
+Utente [8] :
+Nome............: Cristopher
+Cognome.........: Bianchi
+Indirizzo........: Sottopassaggio METRO SANTA RADEGONDA Milano
+Mail............: c.bianchi@libero.it
+Password........: password
+Latitudine......: 93
+Longitudine.....: 72
+Stato...........: A
+
+Utente [9] :
+Nome............: Massimiliano
+Cognome.........: Mazza
+Indirizzo........: Via CESARE MANGILI Milano
+Mail............: m.mazza@alice.it
+Password........: password
+Latitudine......: 12
+Longitudine.....: 10
+Stato...........: A
+
+Utente [10] :
+Nome............: Davide
+Cognome.........: Gargiulo
+Indirizzo........: Via SAN SIMPLICIANO Milano
+Mail............: d.gargiulo@tiscali.it
+Password........: password
+Latitudine......: 45
+Longitudine.....: 1
+Stato...........: A
+
+Utente [11] :
+Nome............: Elettra
+Cognome.........: Marchi
+Indirizzo........: Viale FEDERICO SCHILLER Milano
+Mail............: e.marchi@mail.it
+Password........: password
+Latitudine......: 63
+Longitudine.....: 46
+Stato...........: A
+
+Utente [12] :
+Nome............: Edy
+Cognome.........: Rossetti
+Indirizzo........: Via ROVELLO Milano
+Mail............: e.rossetti@hotmail.it
+Password........: password
+Latitudine......: 83
+Longitudine.....: 15
+Stato...........: A
+
+Utente [13] :
+Nome............: Manuele
+Cognome.........: Guidi
+Indirizzo........: Via GIUSEPPE MENGONI Milano
+Mail............: m.guidi@hotmail.it
+Password........: password
+Latitudine......: 75
+Longitudine.....: 91
+Stato...........: A
+
+Utente [14] :
+Nome............: Teresa
+Cognome.........: Bernardi
+Indirizzo........: Via MARSALA Milano
+Mail............: t.bernardi@tiscali.it
+Password........: password
+Latitudine......: 27
+Longitudine.....: 17
+Stato...........: A
+
+Utente [15] :
+Nome............: Renato
+Cognome.........: Bianco
+Indirizzo........: Via ARRIGO BOITO Milano
+Mail............: r.bianco@libero.it
+Password........: password
+Latitudine......: 11
+Longitudine.....: 96
+Stato...........: A
+
+Utente [16] :
+Nome............: Abraham
+Cognome.........: Marchetti
+Indirizzo........: Via FILIPPO TURATI Milano
+Mail............: a.marchetti@mail.com
+Password........: password
+Latitudine......: 14
+Longitudine.....: 88
+Stato...........: A
+
+Utente [17] :
+Nome............: Dorotea
+Cognome.........: Bianco
+Indirizzo........: Piazzale RODOLFO MORANDI Milano
+Mail............: d.bianco@gmail.com
+Password........: password
+Latitudine......: 97
+Longitudine.....: 70
+Stato...........: A
+
+Utente [18] :
+Nome............: Mattia
+Cognome.........: Testa
+Indirizzo........: Via DELIO TESSA Milano
+Mail............: m.testa@hotmail.it
+Password........: password
+Latitudine......: 43
+Longitudine.....: 42
+Stato...........: A
+
+Utente [19] :
+Nome............: Giosue'
+Cognome.........: Ceccarelli
+Indirizzo........: Via TOMMASO DA CAZZANIGA Milano
+Mail............: g.ceccarelli@jegjeghede.org
+Password........: password
+Latitudine......: 31
+Longitudine.....: 48
+Stato...........: A
+
+Utente [20] :
+Nome............: Zoe
+Cognome.........: Arena
+Indirizzo........: Corso Di PORTA NUOVA Milano
+Mail............: z.arena@mail.it
+Password........: password
+Latitudine......: 22
+Longitudine.....: 75
+Stato...........: A
+
+Utente [21] :
+Nome............: Jonathan
+Cognome.........: Santini
+Indirizzo........: Viale LUIGI CAMOENS Milano
+Mail............: j.santini@tiscali.it
+Password........: password
+Latitudine......: 40
+Longitudine.....: 66
+Stato...........: A
+
+Utente [22] :
+Nome............: Viviana
+Cognome.........: Franco
+Indirizzo........: Piazza CARLO MIRABELLO Milano
+Mail............: v.franco@tiscali.it
+Password........: password
+Latitudine......: 10
+Longitudine.....: 14
+Stato...........: A
+
+Utente [23] :
+Nome............: Nicol
+Cognome.........: De Simone
+Indirizzo........: Via GOITO Milano
+Mail............: n.de simone@hotmail.it
+Password........: password
+Latitudine......: 87
+Longitudine.....: 81
+Stato...........: A
+
+Utente [24] :
+Nome............: Diana
+Cognome.........: Giuliani
+Indirizzo........: Via BRERA Milano
+Mail............: d.giuliani@mail.it
+Password........: password
+Latitudine......: 20
+Longitudine.....: 92
+Stato...........: A
+
+Utente [25] :
+Nome............: Eloisa
+Cognome.........: Palumbo
+Indirizzo........: Via MADONNINA Milano
+Mail............: e.palumbo@jegjeghede.org
+Password........: password
+Latitudine......: 89
+Longitudine.....: 23
+Stato...........: A
+
+Utente [26] :
+Nome............: Sibilla
+Cognome.........: Cavallo
+Indirizzo........: Via ANCONA Milano
+Mail............: s.cavallo@tiscali.it
+Password........: password
+Latitudine......: 82
+Longitudine.....: 20
+Stato...........: A
+
+Utente [27] :
+Nome............: Dharma
+Cognome.........: Caputo
+Indirizzo........: Via PIETRO VERRI Milano
+Mail............: d.caputo@mail.it
+Password........: password
+Latitudine......: 77
+Longitudine.....: 50
+Stato...........: A
+
+Utente [28] :
+Nome............: Filippo
+Cognome.........: Pinna
+Indirizzo........: Via MILAZZO Milano
+Mail............: f.pinna@tiscali.it
+Password........: password
+Latitudine......: 18
+Longitudine.....: 80
+Stato...........: A
+
+Utente [29] :
+Nome............: Gianluca
+Cognome.........: Meloni
+Indirizzo........: Piazzetta Di BRERA Milano
+Mail............: g.meloni@tiscali.it
+Password........: password
+Latitudine......: 24
+Longitudine.....: 28
+Stato...........: A
+
+Utente [30] :
+Nome............: Samuele
+Cognome.........: Di Stefano
+Indirizzo........: Piazza BELGIOIOSO Milano
+Mail............: s.di stefano@jegjeghede.org
+Password........: password
+Latitudine......: 55
+Longitudine.....: 82
+Stato...........: A
+
+Utente [31] :
+Nome............: Nabila
+Cognome.........: Grassi
+Indirizzo........: Piazza SANT'ERASMO Milano
+Mail............: n.grassi@outlook.com
+Password........: password
+Latitudine......: 92
+Longitudine.....: 32
+Stato...........: A
+
+Utente [32] :
+Nome............: Marco
+Cognome.........: Ferrara
+Indirizzo........: Via ALESSANDRO MANZONI Milano
+Mail............: m.ferrara@mail.it
+Password........: password
+Latitudine......: 8
+Longitudine.....: 87
+Stato...........: A
+
+Utente [33] :
+Nome............: Bernardo
+Cognome.........: Caputo
+Indirizzo........: Via PALESTRO Milano
+Mail............: b.caputo@mail.it
+Password........: password
+Latitudine......: 75
+Longitudine.....: 35
+Stato...........: A
+
+Utente [34] :
+Nome............: Rossella
+Cognome.........: Di Stefano
+Indirizzo........: Galleria CIRO FONTANA Milano
+Mail............: r.di stefano@mail.it
+Password........: password
+Latitudine......: 46
+Longitudine.....: 1
+Stato...........: A
+
+Utente [35] :
+Nome............: Emanuele
+Cognome.........: Grassi
+Indirizzo........: Largo GUIDO DONEGANI Milano
+Mail............: e.grassi@gmail.com
+Password........: password
+Latitudine......: 74
+Longitudine.....: 74
+Stato...........: A
+
+Utente [36] :
+Nome............: Vittorio
+Cognome.........: Parisi
+Indirizzo........: Via RENZO BERTONI Milano
+Mail............: v.parisi@tiscali.it
+Password........: password
+Latitudine......: 92
+Longitudine.....: 65
+Stato...........: A
+
+Utente [37] :
+Nome............: Yasmine
+Cognome.........: Barone
+Indirizzo........: Via MONTEBELLO Milano
+Mail............: y.barone@hotmail.it
+Password........: password
+Latitudine......: 60
+Longitudine.....: 70
+Stato...........: A
+
+Utente [38] :
+Nome............: Dharma
+Cognome.........: Bianchi
+Indirizzo........: Vicolo FIORI Milano
+Mail............: d.bianchi@mail.com
+Password........: password
+Latitudine......: 4
+Longitudine.....: 72
+Stato...........: A
+
+Utente [39] :
+Nome............: Manuela
+Cognome.........: Marchetti
+Indirizzo........: Largo LINO MONTAGNA Milano
+Mail............: m.marchetti@outlook.com
+Password........: password
+Latitudine......: 87
+Longitudine.....: 52
+Stato...........: A
+
+Utente [40] :
+Nome............: Anna
+Cognome.........: Rossetti
+Indirizzo........: Viale ALESSANDRO PETOFI Milano
+Mail............: a.rossetti@mail.com
+Password........: password
+Latitudine......: 54
+Longitudine.....: 88
+Stato...........: A
+
+Utente [41] :
+Nome............: Naomi
+Cognome.........: Grasso
+Indirizzo........: Via FILODRAMMATICI Milano
+Mail............: n.grasso@alice.it
+Password........: password
+Latitudine......: 56
+Longitudine.....: 65
+Stato...........: A
+
+Utente [42] :
+Nome............: Enrico
+Cognome.........: Sanna
+Indirizzo........: Via GIUSEPPE BRENTANO Milano
+Mail............: e.sanna@gmail.com
+Password........: password
+Latitudine......: 79
+Longitudine.....: 85
+Stato...........: A
+
+Utente [43] :
+Nome............: Zoe
+Cognome.........: Catalano
+Indirizzo........: Via UGO FOSCOLO Milano
+Mail............: z.catalano@jegjeghede.org
+Password........: password
+Latitudine......: 59
+Longitudine.....: 5
+Stato...........: A
+
+Utente [44] :
+Nome............: Soledad
+Cognome.........: Marra
+Indirizzo........: Piazza SAN MARCO Milano
+Mail............: s.marra@hotmail.it
+Password........: password
+Latitudine......: 50
+Longitudine.....: 87
+Stato...........: A
+
+Utente [45] :
+Nome............: Nives
+Cognome.........: Milani
+Indirizzo........: Via Di PORTA TENAGLIA Milano
+Mail............: n.milani@outlook.com
+Password........: password
+Latitudine......: 94
+Longitudine.....: 10
+Stato...........: A
+
+Utente [46] :
+Nome............: Gloria
+Cognome.........: Costantini
+Indirizzo........: Via FARINE Milano
+Mail............: g.costantini@alice.it
+Password........: password
+Latitudine......: 39
+Longitudine.....: 27
+Stato...........: A
+
+Utente [47] :
+Nome............: Irene
+Cognome.........: Fabbri
+Indirizzo........: Viale MOLIERE Milano
+Mail............: i.fabbri@gmail.com
+Password........: password
+Latitudine......: 42
+Longitudine.....: 6
+Stato...........: A
+
+Utente [48] :
+Nome............: Agnese
+Cognome.........: Martini
+Indirizzo........: Sito Dei BAGATTI VALSECCHI Milano
+Mail............: a.martini@libero.it
+Password........: password
+Latitudine......: 76
+Longitudine.....: 31
+Stato...........: A
+
+Utente [49] :
+Nome............: Miriam
+Cognome.........: Lorusso
+Indirizzo........: Via LUIGI ALBERTINI Milano
+Mail............: m.lorusso@alice.it
+Password........: password
+Latitudine......: 60
+Longitudine.....: 14
+Stato...........: A
+
+Utente [50] :
+Nome............: Annalisa
+Cognome.........: Guidi
+Indirizzo........: Via RIVOLI Milano
+Mail............: a.guidi@gmail.com
+Password........: password
+Latitudine......: 72
+Longitudine.....: 36
+Stato...........: A
