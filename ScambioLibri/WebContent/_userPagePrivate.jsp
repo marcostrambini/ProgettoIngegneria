@@ -15,32 +15,10 @@
 <title>Book Sharing</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
-<meta name="description" content="applicazione per lo scambio di libri tra utenti limitrofi ">
-
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
-
+<meta name="description" content="il corso, partendo dalle nozioni di base, ti spiega in cosa consiste il linguaggio HTML e come utilizzarlo per muoverti più 
+facilmente all'interno del web. ">
+	
 <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
-
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    
-    <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
-    
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-<script type="text/javascript">
-
-$(document).ready( function () {
-    $('#table_id').DataTable();
-    $('#showB').hide();
-    
-} );
-</script>
 </head>
  
  
@@ -138,8 +116,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 						Descrizione: 
 						</td>
 						<td>
-						
-						<%=(utente.getDescrizione()!=null)?(utente.getDescrizione()):("") %>
+						<%=utente.getDescrizione() %>
 						</td>
 					</tr>
 				</table>
@@ -177,11 +154,11 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 	
 	
 	<table class="table">
-	<% for(int i=0; i<utente.getListaLibriUtente().size();i++){ %>
+	<% for(int i=0; i<listaLibriUtente.size();i++){ %>
 	<tr>
 	
 		<td>
-		<img src=<%=utente.getListaLibriUtente().get(i).getPath_img() %> class="logo"/>
+		<img src=<%=listaLibriUtente.get(i).getPath_img() %> class="logo"/>
 		</td>
 		<td>
 		<table >
@@ -192,7 +169,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 						Titolo: 
 						</td>
 						<td>
-						 &nbsp; <%=utente.getListaLibriUtente().get(i).getNome() %>
+						 &nbsp; <%=listaLibriUtente.get(i).getNome() %>
 						</td>
 					</tr>
 					<tr>
@@ -200,7 +177,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 						Autore:
 						</td>
 						<td>
-						 &nbsp; <%=utente.getListaLibriUtente().get(i).getAutore() %>
+						 &nbsp; <%=listaLibriUtente.get(i).getAutore() %>
 						</td>
 					</tr>
 					<tr>
@@ -208,7 +185,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 						Categoria:
 						</td>
 						<td>
-						 &nbsp; <%=utente.getListaLibriUtente().get(i).getCategoria() %>
+						 &nbsp; <%=listaLibriUtente.get(i).getCategoria() %>
 						</td>
 					</tr>
 					
@@ -232,46 +209,11 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 	
 	
 </div>
-
-
-
-
 </div>
 
-<div>
-<table id="table_id" class="display" style="width:800px">
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>immagine libro</th>
-            <th>titolo</th>
-            <th>autore</th>
-            <th>categoria</th>
-        </tr>
-    </thead>
-    <tbody>
-    
-    
-<% for(int i=0; i<utente.getListaLibriUtente().size();i++){ %>
-        <tr>
-        	<td> </td>
-            <td><a href=<%=utente.getListaLibriUtente().get(i).getPath_img() %>><img alt="" src=<%=utente.getListaLibriUtente().get(i).getPath_img() %> height="150" width="100"></a></td>
-            <td><%=utente.getListaLibriUtente().get(i).getNome() %> </td>
-            <td><%=utente.getListaLibriUtente().get(i).getAutore() %> </td>
-            <td><%=utente.getListaLibriUtente().get(i).getCategoria() %> </td>
-        </tr>
-      
-      
-      <% }%>
-        
-   
-    </tbody>
-</table>
-
-
-
-</div>
-
-
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
 </body>
 </html>

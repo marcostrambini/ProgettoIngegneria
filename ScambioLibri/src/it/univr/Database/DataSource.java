@@ -1,5 +1,9 @@
 package it.univr.Database;
 
+import it.univr.Tools.Libro;
+import it.univr.Tools.MyQuery;
+import it.univr.Tools.Utente;
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -111,17 +115,31 @@ public class DataSource implements Serializable {
 //  }
 //  
 //
-//  private PresideFacolta makePFBean( ResultSet rs ) throws SQLException {
-//	  PresideFacolta bean = new PresideFacolta();
-//	  bean.setNomef(rs.getString("nomef"));
-//	  bean.setCodice(rs.getString("codice"));
-//	  bean.setIndirizzo(rs.getString("indirizzo"));
-//	  bean.setNomep(rs.getString("nomep"));
-//	  bean.setCognomep(rs.getString("cognomep"));
-//	  
-//      return bean;
-//  }
+  private Utente makeUserBean( ResultSet rs ) throws SQLException {
+	  Utente bean = new Utente();
+	  bean.setNome(rs.getString("nome"));
+	  bean.setCognome(rs.getString("cognome"));
+	  bean.setEmail(rs.getString("email"));
+	  bean.setIndirizzo(rs.getString("indirizzo"));
+	  bean.setLatitudine(rs.getInt("latitudine"));
+	  bean.setLongitudine(rs.getInt("longitudine"));
+	  bean.setDescrizione(rs.getString("descrizione"));
+	  
+      return bean;
+  }
 
+  private Libro makeLibroBean( ResultSet rs ) throws SQLException {
+	  Libro bean = new Libro();
+	  bean.setId(rs.getInt("id"));
+	  bean.setNome(rs.getString("nome"));
+	  bean.setPath_img(rs.getString("path_img"));
+	  bean.setAutore(rs.getString("autore"));
+	  bean.setCategoria(rs.getString("nome_categoria"));
+	  
+      return bean;
+  }
+  
+  
   // ===========================================================================
 
   /**
@@ -313,6 +331,75 @@ public class DataSource implements Serializable {
 //	    return result;
 //	  }
   
+  
+  
+  public ArrayList<Libro> getListaLibriUtente(String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  ArrayList<Libro> result = new ArrayList<Libro>();
+	  
+	  con = getConnection();
+	  
+	  try {
+		pstm = con.prepareStatement(MyQuery.getqSelectLibriFromUtente());
+		pstm.setString(1, email);
+		rs = pstm.executeQuery();
+		while(rs.next())
+			result.add(makeLibroBean(rs));
+		
+	  } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  
+	  return result;
+  }
+  
+  /**
+   * metodo per verificare il login
+   * @param email
+   * @param password
+   * @return
+   */
+  public Utente login(String email, String password){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  Utente result = null;
+	 
+	  
+	  try {
+		 con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qLogin);
+		pstm.setString(1, email);
+		pstm.setString(2, password);
+		rs = pstm.executeQuery();
+		if(rs.next()){
+			result = makeUserBean(rs);
+			result.setListaLibriUtente(getListaLibriUtente(email));
+			System.out.println("ho recuperato l'utente: "+result.getNome()+" "+result.getCognome());
+		
+		}
+		
+		
+	} catch (SQLException e) {
+		System.out.println("Problemi con il recupero dello user richiesto");
+		e.printStackTrace();
+	}finally{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  
+	  
+	  
+	  return result;
+  }
+  
   public Connection getConnection(){
 	  
 	  try {
@@ -325,8 +412,6 @@ public class DataSource implements Serializable {
 	  
   }
   
-  static String qSelectLibriFromUtente = " select l.id,l.nome,l.path_img,l.autore,c.nome from ing_libro l join ing_categoria c on l.categoria = c.id " +
-		   " join ing_possessolibro p on p.id_libro = l.id join ing_utente u on u.email =p.email_utente " +
-		   " where l.stato = 'A' and u.email = ?";
+ 
 
 }
