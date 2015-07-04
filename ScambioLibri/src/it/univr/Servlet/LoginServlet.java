@@ -13,6 +13,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.Session;
 
 /**
  * Servlet implementation class LoginServlet
@@ -42,6 +45,9 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		HttpSession session = request.getSession();
+
+		
 		DataSource ds;
 		Utente utente =  null;
 	
@@ -67,9 +73,10 @@ public class LoginServlet extends HttpServlet {
          if(utente!=null){
          System.out.println("dalla servlet login vedo questo utente: "+utente.getNome()+" "+utente.getCognome());
 
-         request.setAttribute("utente", utente);  
-
+         session.setAttribute("utente", utente);  
+         session.setAttribute("userLogged", utente.getNome()+" "+utente.getCognome());
          getServletConfig().getServletContext().getRequestDispatcher("/userPagePrivate.jsp").forward(request,response);
+         
          }
          else
         	 getServletConfig().getServletContext().getRequestDispatcher("/accessDenied.jsp").forward(request,response);

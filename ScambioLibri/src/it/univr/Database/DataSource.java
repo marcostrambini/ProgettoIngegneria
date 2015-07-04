@@ -357,6 +357,33 @@ public class DataSource implements Serializable {
 	  return result;
   }
   
+  /**
+   * restituisce la lista dei libri che un utente non ha
+   * @param email
+   * @return
+   */
+  public ArrayList<Libro> getListaLibri(String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  ArrayList<Libro> result = new ArrayList<Libro>();
+	  
+	  con = getConnection();
+	  
+	  try {
+		pstm = con.prepareStatement(MyQuery.getqSelectTuttiLibriNotUtente());
+		pstm.setString(1, email);
+		rs = pstm.executeQuery();
+		while(rs.next())
+			result.add(makeLibroBean(rs));
+		
+	  } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  
+	  return result;
+  }
   
   /**
    * ritorna la lista dei libri di un determinato utente
@@ -423,6 +450,168 @@ public class DataSource implements Serializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	  return result;
+  }
+  
+  /**
+   * associa il possesso di un libro ad un utente
+   * @param email
+   * @param idLibro
+   */
+  public void setUserBook(String email, int idLibro){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  Boolean result = false;
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qPossessoLibero);
+		pstm.setString(1, email);
+		pstm.setInt(2, idLibro);
+		result = !pstm.execute();
+	  }catch(SQLException e){
+		  e.printStackTrace();
+	  }finally{
+		  try {
+			pstm.close();
+			 con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	  }
+	  
+  }
+  
+  /**
+   * cancello la relazione tra utente e libro posseduto
+   * @param email
+   * @param idLibro
+   */
+  public void delUserBook(String email, int idLibro){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  Boolean result = false;
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qDelPossessoLibero);
+		pstm.setString(1, email);
+		pstm.setInt(2, idLibro);
+		result = !pstm.execute();
+	  }catch(SQLException e){
+		  e.printStackTrace();
+	  }finally{
+		  try {
+			pstm.close();
+			 con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	  }
+	  
+  }
+  
+  public void updDescrizioneUtente(String descrizione, String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  Boolean result = false;
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qUpdDescUtente);
+		pstm.setString(1, descrizione);
+		pstm.setString(2, email);
+		result = !pstm.execute();
+	  }catch(SQLException e){
+		  e.printStackTrace();
+	  }finally{
+		  try {
+			pstm.close();
+			 con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  }
+	  
+  }
+  
+  public void addLibroNewUtente(String nomeLibro, String autoreLibro, String categoria, String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  Statement stm = null;
+	  ResultSet rs = null;
+	  Boolean result = false;
+	  int idLibro = 0;
+	  int idCategoria = 0;
+	  try {
+		con = getConnection();
+		con.setAutoCommit(false);
+		stm = con.createStatement();
+		rs=stm.executeQuery("select id from ing_categoria where nome = '"+categoria+"'");
+		if(rs.next())
+			idCategoria = rs.getInt("id");
+		
+		System.out.println("id della categoria "+categoria+" = "+idCategoria);
+		
+		pstm = con.prepareStatement(MyQuery.qInsertNuovoLibro);
+		pstm.setString(1, nomeLibro);
+		pstm.setInt(2, idCategoria);
+		pstm.setString(3, autoreLibro);
+		result = !pstm.execute();
+		con.commit();
+		con.setAutoCommit(true);
+		
+		stm = con.createStatement();
+		rs=stm.executeQuery("select id from ing_libro where nome = '"+nomeLibro+"'");
+		if(rs.next())
+			idLibro = rs.getInt("id");
+		
+		setUserBook(email, idLibro);
+		
+		
+	  }catch(SQLException e){
+		  e.printStackTrace();
+	  }finally{
+		  try {
+			pstm.close();
+			 con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  }
+	  
+  }
+  
+  public ArrayList<String> getCategorie(){
+	  Connection con = null;
+	  Statement stm = null;
+	  ResultSet rs = null;
+	  ArrayList<String > result = new ArrayList<String>();
+	  
+	  
+	  try {
+		con = getConnection();
+		stm = con.createStatement();
+		rs=stm.executeQuery(MyQuery.qSelCategorie);
+		while(rs.next())
+			result.add(rs.getString(1));
+		
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			stm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	  
 	  

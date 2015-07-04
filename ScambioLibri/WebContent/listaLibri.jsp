@@ -17,22 +17,9 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta name="description" content="applicazione per lo scambio di libri tra utenti limitrofi ">
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.css">
 
-<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+<%@include file="Master.jsp" %>
 
-
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    
-    <!-- DataTables -->
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.js"></script>
-    
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready( function () {
@@ -42,7 +29,7 @@ $(document).ready( function () {
 } );
 </script>
 
-<%@include file="Master.jsp" %>
+
 
 </head>
  
@@ -52,13 +39,14 @@ $(document).ready( function () {
 
 <%
 DataSource ds = new DataSource();
-ArrayList<Libro> listaLibri = ds.getListaLibri();
+Utente utente = (Utente) session.getAttribute("utente");
+ArrayList<Libro> listaLibri = ds.getListaLibri(utente.getEmail());
 
 %>
 
 
 
-<div class="row" style="padding-top:70px">
+<div class="row" >
 <div class="container">
 <h4>Seleziona tra i libri esistenti nel database</h4>
 </div>
@@ -81,7 +69,7 @@ ArrayList<Libro> listaLibri = ds.getListaLibri();
     
 <% for(int i=0; i<listaLibri.size();i++){ %>
         <tr>
-        	<td><a href="BookServlet" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a> </td>
+        	<td><a href="BookServlet?act=al&id=<%=listaLibri.get(i).getId() %>" ><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a> </td>
             <td><a href=<%=listaLibri.get(i).getPath_img() %>><img alt="" src=<%=listaLibri.get(i).getPath_img() %> height="150" width="100"></a></td>
             <td><%=listaLibri.get(i).getNome() %> </td>
             <td><%=listaLibri.get(i).getAutore() %> </td>
@@ -99,6 +87,6 @@ ArrayList<Libro> listaLibri = ds.getListaLibri();
 
 </div>
 </div>
-
+   
 </body>
 </html>
