@@ -26,4 +26,14 @@ public class MyQuery {
 	 */
 	public static String qLogin = " select * from ing_utente where stato = 'A' and email = ? and password = ? ";
 	
+	/**
+	 * ritorna le info di tutti i libri nel db
+	 */
+	public static String qSelectTuttiLibri = " select l.*,c.nome as nome_categoria from ing_libro l join ing_categoria c on l.categoria = c.id order by nome" ;
+			  
+
+	public static String getqSelectTuttiLibri() {
+		return qSelectTuttiLibri;
+	}
+	
 }

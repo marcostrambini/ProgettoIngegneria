@@ -331,8 +331,38 @@ public class DataSource implements Serializable {
 //	    return result;
 //	  }
   
+  /**
+   * ritorna la lista di tutti i libri presenti nel db
+   * @return
+   */
+  public ArrayList<Libro> getListaLibri(){
+	  Connection con = null;
+	  Statement stm = null;
+	  ResultSet rs = null;
+	  ArrayList<Libro> result = new ArrayList<Libro>();
+	  
+	  con = getConnection();
+	  
+	  try {
+		stm = con.createStatement();
+		rs = stm.executeQuery(MyQuery.getqSelectTuttiLibri());
+		while(rs.next())
+			result.add(makeLibroBean(rs));
+		
+	  } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  
+	  return result;
+  }
   
   
+  /**
+   * ritorna la lista dei libri di un determinato utente
+   * @param email
+   * @return
+   */
   public ArrayList<Libro> getListaLibriUtente(String email){
 	  Connection con = null;
 	  PreparedStatement pstm = null;

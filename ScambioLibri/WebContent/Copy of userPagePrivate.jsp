@@ -46,7 +46,6 @@ $(document).ready( function () {
  
  
 <body >
-
 <%
 
 Utente utente = null;
@@ -172,7 +171,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 	
 	<br>
 	
-	<div id="elencoLibri" style="display: none;">
+	<div id="elencoLibri">
 	<h3>Elenco di libri posseduti</h3>
 	
 	
@@ -239,9 +238,8 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 
 </div>
 
-<div class="row">
-<div class="container">
-<table id="table_id" class="display">
+<div>
+<table id="table_id" class="display" style="width:800px">
     <thead>
         <tr>
             <th>id</th>
@@ -273,7 +271,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 
 
 </div>
-</div>
+
 
 </body>
 </html>
