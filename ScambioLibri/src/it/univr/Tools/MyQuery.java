@@ -101,6 +101,24 @@ public class MyQuery {
 	public static String qDisableBook = " update ing_libro set stato = 'D' where id = ?";
 	
 	public static String qEnableBook = " update ing_libro set stato = 'A' where id = ?";
+
+	
+	
+	/** statistica **/
+	public static String qSelNumeroPossessi = " select count(p.id_libro) as numero_possessi,l.nome ,l.autore "
+											+ " from ing_possessolibro p join ing_libro l on p.id_libro = l.id "
+											+ " group by p.id_libro,l.nome,l.autore order by numero_possessi desc";
+	
+	public static String qCountUtenti = " select count (*) from ing_utente";
+	
+	public static String qCountUtentiA = " select count (*) from ing_utente where stato = 'A'";
+	
+	public static String qCountUtentiD = " select count (*) from ing_utente where stato = 'D'";
+	
+	public static String qCountLibriA = " select count (*) from ing_libro where stato = 'A'";
+	
+	public static String qCountLibriD = " select count (*) from ing_libro where stato = 'D'";
+	
 	
 	public static String getqSelectTuttiLibri() {
 		return qSelectTuttiLibri;

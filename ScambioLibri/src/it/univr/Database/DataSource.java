@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.locks.StampedLock;
 
 /**
  * Questa classe mette a disposizione i metodi per effettuare interrogazioni
@@ -41,40 +42,6 @@ public class DataSource implements Serializable {
   // Driver da utilizzare per la connessione e l'esecuzione delle query.
   private String driver = "org.postgresql.Driver";
 
-  // -- definizione delle query ------------------------------------------------
-
-  // recupera le principali info su tutti i corsi di studi
-//  private String css =
-//    "SELECT id, Codice, Nome FROM corsostudi ORDER BY Nome";
-
-  // recupera tutte le informazioni di un particolare corso di studi
-//  private String cs =
-//    "SELECT id,nome,codice,abbreviazione,durataanni,sede,informativa "
-//    + "FROM corsostudi "
-//    + "WHERE id=?";
-
-  // recupera la/e facolta' di un particolare corso di studi
-//  private String csf =
-//    "SELECT DISTINCT f.nome "
-//    + "FROM facolta f INNER JOIN corsoinfacolta csf "
-//    + "ON (f.id=csf.id_facolta) "
-//    + "WHERE csf.id_corsostudi=?";
-
-  //recupera il nome, codice, nome preside delle facolta
-//  private String q2 = 
-//		  "select f.nome as nomef, f.codice, f.indirizzo,p.nome as nomep,p.cognome as cognomep "
-//		+ "from facolta f join persona p "
-//        + "on p.id = f.id_preside_persona";
-//
-//  private String dettaglioPreside = 
-//		  "select p.nome as nomep,p.cognome as cognomep "
-//		  +"from facolta f join persona p "
-//		  +"on p.id = f.id_preside_persona "
-//		  +"where f.nome = ?";
-  
-  
-  // === Methods ===============================================================
-
   /**
    * Costruttore della classe. Carica i driver da utilizzare per la connessione
    * alla base di dati.
@@ -86,43 +53,6 @@ public class DataSource implements Serializable {
     Class.forName( driver );
   }
 
-  /**
-   * Il metodo costruisce un bean a partire dal record attuale del ResultSet
-   * passato come parametro.
-   *
-   * @param rs
-   * @return
-   * @throws SQLException
-   */
-//  private CorsoStudi makeCorsoStudiBean( ResultSet rs ) throws SQLException {
-//    CorsoStudi bean = new CorsoStudi();
-//    bean.setId( rs.getInt( "id" ) );
-//    bean.setNomeCorsoStudi( rs.getString( "Nome" ) );
-//    bean.setCodice( rs.getString( "Codice" ) );
-//    bean.setAbbreviazione( rs.getString( "Abbreviazione" ) );
-//    bean.setDurataAnni( rs.getInt( "Durataanni" ) );
-//    bean.setSede( rs.getString( "Sede" ) );
-//    bean.setInformativa( rs.getString( "Informativa" ) );
-//    return bean;
-//  }
-
-  /**
-   * Il metodo costruisce un bean a partire dal record attuale del ResultSet
-   * passato come parametro.
-   *
-   * @param rs
-   * @return
-   * @throws SQLException
-   */
-//  private CorsoStudi makeCSBean( ResultSet rs ) throws SQLException {
-//    CorsoStudi bean = new CorsoStudi();
-//    bean.setId( rs.getInt( "id" ) );
-//    bean.setNomeCorsoStudi( rs.getString( "Nome" ) );
-//    bean.setCodice( rs.getString( "Codice" ) );
-//    return bean;
-//  }
-//  
-//
   private Utente makeUserBean( ResultSet rs ) throws SQLException {
 	  Utente bean = new Utente();
 	  bean.setNome(rs.getString("nome"));
@@ -990,6 +920,205 @@ public class DataSource implements Serializable {
 			}
 		}
 	}
+   
+   /**
+    * recupera i nome dei libri con i relativi nuemri di possesso
+    * @return
+    */
+   public ResultSet getNumeroPossessi(){
+	   ResultSet rs = null;
+	   Connection con = null;
+	   try {
+		   con = getConnection();
+		   Statement stm = con.createStatement();
+		   rs = stm.executeQuery(MyQuery.qSelNumeroPossessi);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	   
+	   return rs;
+   }
+   
+   /**
+    * restituisce il numero degli utenti nel db
+    * @return
+    */
+   public int getNumeroUtenti(){
+	   int result =0;
+	   ResultSet rs = null;
+	   Connection con = null;
+	   Statement stm = null;
+	   try {
+		   con = getConnection();
+		   stm = con.createStatement();
+		   rs = stm.executeQuery(MyQuery.qCountUtenti);
+		   if(rs.next())
+			   result = rs.getInt(1);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			stm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	   return result;
+   }
+   
+   /**
+    * ritorna il numero degli utenti abilitati
+    * @return
+    */
+   public int getNumeroUtentiA(){
+	   int result =0;
+	   ResultSet rs = null;
+	   Connection con = null;
+	   Statement stm = null;
+	   try {
+		   con = getConnection();
+		   stm = con.createStatement();
+		   rs = stm.executeQuery(MyQuery.qCountUtentiA);
+		   if(rs.next())
+			   result = rs.getInt(1);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			stm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	   return result;
+   }
+   
+   /**
+    * ritorna il numero degli utenti disabilitati
+    * @return
+    */
+   public int getNumeroUtentiD(){
+	   int result =0;
+	   ResultSet rs = null;
+	   Statement stm = null;
+	   Connection con = null;
+	   try {
+		   con = getConnection();
+		   stm = con.createStatement();
+		   rs = stm.executeQuery(MyQuery.qCountUtentiD);
+		   if(rs.next())
+			   result = rs.getInt(1);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			stm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	   return result;
+   }
+   
+   /**
+    * ritorna il numero dei libri abilitati
+    * @return
+    */
+   public int getNumeroLibriA(){
+	   int result =0;
+	   ResultSet rs = null;
+	   Connection con = null;
+	   Statement stm = null;
+	   try {
+		   con = getConnection();
+		   stm = con.createStatement();
+		   rs = stm.executeQuery(MyQuery.qCountLibriA);
+		   if(rs.next())
+			   result = rs.getInt(1);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			stm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	   return result;
+   }
+   
+   /**
+    * ritorna il numero dei libri disabilitati
+    * @return
+    */
+   public int getNumeroLibriD(){
+	   int result =0;
+	   ResultSet rs = null;
+	   Connection con = null;
+	   Statement stm = null;
+	   try {
+		   con = getConnection();
+		   stm = con.createStatement();
+		   rs = stm.executeQuery(MyQuery.qCountLibriD);
+		   if(rs.next())
+			   result = rs.getInt(1);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			stm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	   return result;
+   }
+   
+   /**
+    * ritorna il numero di libri presenti nel database
+    * @return
+    */
+   public int getNumeroLibri(){
+	   int result =0;
+	   ResultSet rs = null;
+	   Connection con = null;
+	   Statement stm = null;
+	   try {
+		   con = getConnection();
+		   stm = con.createStatement();
+		   rs = stm.executeQuery(MyQuery.qCountLibri);
+		   if(rs.next())
+			   result = rs.getInt(1);
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			stm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	   return result;
+   }
 	  
   /**
    * ritorna l'oggetto connessione al DAtaSource

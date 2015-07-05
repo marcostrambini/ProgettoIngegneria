@@ -72,11 +72,8 @@ $(document).ready( function () {
 <%
 DataSource ds = new DataSource();
 Utente utente = (Utente) session.getAttribute("utente");
-ArrayList<Utente> listaUtentiA = ds.getListaUtentiA();
-ArrayList<Utente> listaUtentiD = ds.getListaUtentiD();
-ArrayList<Libro> listaLibriA = ds.getListaLibri();
-ArrayList<Libro> listaLibriD = ds.getListaLibriD();
 String userLogged = (String) session.getAttribute("userLogged");
+ResultSet rs = ds.getNumeroPossessi();
 %>
 
 <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom:50px">
@@ -119,91 +116,36 @@ String userLogged = (String) session.getAttribute("userLogged");
 
 <div class="row" style="padding-top:70px" >
 <div class="container">
-<h4>Utenti presenti nel database</h4>
+<h4>Numero degli utenti presenti nel database: <%=ds.getNumeroUtenti() %> di cui:</h4>
+<h5>Abilitati = <%=ds.getNumeroUtentiA() %></h5>
+<h5>Disabilitati = <%=ds.getNumeroUtentiD() %></h5>
+
+<br>
+<h4>Numero dei libri presenti nel database: <%=ds.getNumeroLibri() %> di cui:</h4>
+<h5>Abilitati = <%=ds.getNumeroLibriA() %></h5>
+<h5>Disabilitati = <%=ds.getNumeroLibriD() %></h5>
+
 </div>
 </div>
 
 <div class="row" >
 <div class="container">
-<h4>Utenti abilitati</h4>
+<h4>Possesso Libri</h4>
 <table id="table_id" class="display">
     <thead>
         <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Email</th>
-            <th>Indirizzo</th>
-        </tr>
-    </thead>
-    <tbody>
-<% for(int i=0; i<listaUtentiA.size();i++){ %>
-        <tr>
-        	<td><a href="BookServlet?act=du&email=<%=listaUtentiA.get(i).getEmail() %>" ><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a> </td>
-            <td><%=listaUtentiA.get(i).getNome() %></td>
-            <td><%=listaUtentiA.get(i).getCognome() %> </td>
-            <td><%=listaUtentiA.get(i).getEmail() %> </td>
-            <td><%=listaUtentiA.get(i).getIndirizzo() %> </td>
-        </tr>
-      <% }%>
-   </tbody>
-</table>
-</div>
-</div>
-
-<div class="row" >
-<div class="container">
-<h4>Utenti disabilitati</h4>
-<table id="table_id2" class="display">
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Email</th>
-            <th>Indirizzo</th>
-        </tr>
-    </thead>
-    <tbody>
-<% for(int i=0; i<listaUtentiD.size();i++){ %>
-        <tr>
-        	<td><a href="BookServlet?act=au&email=<%=listaUtentiD.get(i).getEmail() %>" ><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> </td>
-            <td><%=listaUtentiD.get(i).getNome() %></td>
-            <td><%=listaUtentiD.get(i).getCognome() %> </td>
-            <td><%=listaUtentiD.get(i).getEmail() %> </td>
-            <td><%=listaUtentiD.get(i).getIndirizzo() %> </td>
-        </tr>
-      <% }%>
-   </tbody>
-</table>
-</div>
-</div>
-
-<div class="row" >
-<div class="container">
-<h4>Libri presenti nel database</h4>
-</div>
-</div>
-
-<div class="row" >
-<div class="container">
-<h4>Libri abilitati</h4>
-<table id="table_id3" class="display">
-    <thead>
-        <tr>
-            <th></th>
             <th>Titolo</th>
             <th>Autore</th>
-            <th>Categoria</th>
+            <th># Possessi</th>
+           
         </tr>
     </thead>
     <tbody>
-<% for(int i=0; i<listaLibriA.size();i++){ %>
+<% while(rs.next()){ %>
         <tr>
-        	<td><a href="BookServlet?act=db&idLibro=<%=listaLibriA.get(i).getId() %>" ><span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span></a> </td>
-            <td><%=listaLibriA.get(i).getNome() %></td>
-            <td><%=listaLibriA.get(i).getAutore() %> </td>
-            <td><%=listaLibriA.get(i).getCategoria() %> </td>
+        	<td><%=rs.getString("nome") %></td>
+            <td><%=rs.getString("autore") %></td>
+			<td><%=rs.getString("numero_possessi") %></td>
            
         </tr>
       <% }%>
@@ -212,31 +154,5 @@ String userLogged = (String) session.getAttribute("userLogged");
 </div>
 </div>
 
-<div class="row" >
-<div class="container">
-<h4>Libri disabilitati</h4>
-<table id="table_id4" class="display">
-    <thead>
-        <tr>
-            <th></th>
-            <th>Titolo</th>
-            <th>Autore</th>
-            <th>Categoria</th>
-        </tr>
-    </thead>
-    <tbody>
-<% for(int i=0; i<listaLibriD.size();i++){ %>
-        <tr>
-        	<td><a href="BookServlet?act=ab&idLibro=<%=listaLibriD.get(i).getId() %>" ><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></a> </td>
-            <td><%=listaLibriD.get(i).getNome() %></td>
-            <td><%=listaLibriD.get(i).getAutore() %> </td>
-            <td><%=listaLibriD.get(i).getCategoria() %> </td>
-           
-        </tr>
-      <% }%>
-   </tbody>
-</table>
-</div>
-</div>
 </body>
 </html>
