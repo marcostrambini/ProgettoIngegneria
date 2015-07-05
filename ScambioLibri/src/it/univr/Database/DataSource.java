@@ -1,17 +1,25 @@
 package it.univr.Database;
 
+import it.univr.Tools.GeoTools;
 import it.univr.Tools.Libro;
 import it.univr.Tools.MyQuery;
+import it.univr.Tools.Prestito;
+import it.univr.Tools.Tools;
 import it.univr.Tools.Utente;
 
 import java.io.Serializable;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -127,7 +135,26 @@ public class DataSource implements Serializable {
 	  
       return bean;
   }
+  
+  private Utente makeUserBeanDistanza( ResultSet rs , int latitudine, int longitudine) throws SQLException {
+	  Utente bean = new Utente();
+	  bean.setNome(rs.getString("nome"));
+	  bean.setCognome(rs.getString("cognome"));
+	  bean.setEmail(rs.getString("email"));
+	  bean.setIndirizzo(rs.getString("indirizzo"));
+	  bean.setLatitudine(rs.getInt("latitudine"));
+	  bean.setLongitudine(rs.getInt("longitudine"));
+	  bean.setDistanza(GeoTools.getDistance(latitudine, longitudine, bean.getLatitudine(), bean.getLongitudine()));
+	  
+      return bean;
+  }
 
+  /**
+   * contruttore di bean Libro
+   * @param rs
+   * @return
+   * @throws SQLException
+   */
   private Libro makeLibroBean( ResultSet rs ) throws SQLException {
 	  Libro bean = new Libro();
 	  bean.setId(rs.getInt("id"));
@@ -139,6 +166,25 @@ public class DataSource implements Serializable {
       return bean;
   }
   
+  /**
+   * contruttore di bean Prestito
+   * @param rs
+   * @return
+   * @throws SQLException
+   */
+  private Prestito makePrestitoBean( ResultSet rs ) throws SQLException {
+	  Prestito bean = new Prestito();
+	  bean.setId(rs.getInt("id"));
+	  bean.setEmail_utente_mittente(rs.getString("email_utente_mittente"));
+	  bean.setEmail_utente_destinatario(rs.getString("email_utente_destinatario"));
+	  bean.setIdLibro(rs.getInt("id_libro"));
+	  bean.setData_i(rs.getDate("data_i"));
+	  bean.setData_f(rs.getDate("data_f"));
+	  bean.setStato(rs.getString("stato"));
+	  bean.setNome_libro(rs.getString("nome_libro"));
+	  
+      return bean;
+  }
   
   // ===========================================================================
 
@@ -385,7 +431,8 @@ public class DataSource implements Serializable {
 	  return result;
   }
   
-  /**
+  
+   /**
    * ritorna la lista dei libri di un determinato utente
    * @param email
    * @return
@@ -404,6 +451,33 @@ public class DataSource implements Serializable {
 		rs = pstm.executeQuery();
 		while(rs.next())
 			result.add(makeLibroBean(rs));
+		
+	  } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  
+	  return result;
+  }
+  
+  public ArrayList<Utente> getListaUtentiVicini(String email, int latitudine, int longitudine){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  Statement stm = null;
+	  ResultSet rs = null;
+	  ArrayList<Utente> result = new ArrayList<Utente>();
+	  
+	  con = getConnection();
+	  
+	  try {
+		
+		pstm = con.prepareStatement(MyQuery.qSelUtenti);
+		pstm.setString(1, email);
+		rs = pstm.executeQuery();
+		while(rs.next())
+			result.add(makeUserBeanDistanza(rs, latitudine, longitudine));
+		
+		Collections.sort(result);
 		
 	  } catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -619,6 +693,225 @@ public class DataSource implements Serializable {
 	  return result;
   }
   
+  /**
+   * ritorna le info di un utente data la mail
+   * @param email
+   * @return
+   */
+  public Utente getUtente(String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  Utente result = null;
+	 
+	  
+	  try {
+		 con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qSelUtente);
+		pstm.setString(1, email);
+	
+		rs = pstm.executeQuery();
+		if(rs.next()){
+			result = makeUserBean(rs);
+			result.setListaLibriUtente(getListaLibriUtente(email));
+			System.out.println("ho recuperato l'utente: "+result.getNome()+" "+result.getCognome());
+		
+		}
+		
+		
+	} catch (SQLException e) {
+		System.out.println("Problemi con il recupero dello user richiesto");
+		e.printStackTrace();
+	}finally{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  return result;
+  }
+  
+  /**
+   * restituisce una lista di prestiti in attesa per un utente
+   * @param email
+   * @return
+   */
+  public ArrayList<Prestito> getPrestitiPending(String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  ArrayList<Prestito> result = new ArrayList<Prestito>();
+	 	  
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qSelPrestitiPending);
+		pstm.setString(1, email);
+	
+		rs = pstm.executeQuery();
+		while(rs.next()){
+			result.add( makePrestitoBean(rs));
+		}
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}finally{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  return result;
+	  
+  }
+  
+  public ArrayList<Prestito> getPrestitiIN(String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  ArrayList<Prestito> result = new ArrayList<Prestito>();
+	 	  
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qSelPrestitiIN);
+		pstm.setString(1, email);
+	
+		rs = pstm.executeQuery();
+		while(rs.next()){
+			result.add( makePrestitoBean(rs));
+		}
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}finally{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  return result;
+	  
+  }
+  
+  public ArrayList<Prestito> getPrestitiOUT(String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  ArrayList<Prestito> result = new ArrayList<Prestito>();
+	 	  
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qSelPrestitiOUT);
+		pstm.setString(1, email);
+	
+		rs = pstm.executeQuery();
+		while(rs.next()){
+			result.add( makePrestitoBean(rs));
+		}
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}finally{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  return result;
+	  
+  }
+  
+  public void insertRichiestPrestito(String email_mittente, String email_destinatario, int idLibro){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	 
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qInsertRichiestaPrestito);
+		pstm.setString(1, email_mittente);
+		pstm.setString(2, email_destinatario);
+		pstm.setInt(3, idLibro);
+		pstm.setDate(4, new java.sql.Date(Tools.getDate().getTime()));
+		pstm.setDate(5, null);
+		pstm.execute();
+		
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	} catch (ParseException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+  }
+	 
+	  public void updPrestitoOK(String email_mittente, String email_destinatario, int idLibro){
+		  Connection con = null;
+		  PreparedStatement pstm = null;
+		 
+		  try {
+			con = getConnection();
+			pstm = con.prepareStatement(MyQuery.qUpdPossessoOK);
+			pstm.setString(1, email_mittente);
+			pstm.setString(2, email_destinatario);
+			pstm.setInt(3, idLibro);
+			pstm.execute();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}  
+  }
+
+	  public void updPrestitoNO(String email_mittente, String email_destinatario, int idLibro){
+		  Connection con = null;
+		  PreparedStatement pstm = null;
+		 
+		  try {
+			con = getConnection();
+			pstm = con.prepareStatement(MyQuery.qUpdPossessoNO);
+			pstm.setString(1, email_mittente);
+			pstm.setString(2, email_destinatario);
+			pstm.setInt(3, idLibro);
+			pstm.execute();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}  
+	}  
+	  
+  /**
+   * ritorna l'oggetto connessione al DAtaSource
+   * @return
+   */
   public Connection getConnection(){
 	  
 	  try {

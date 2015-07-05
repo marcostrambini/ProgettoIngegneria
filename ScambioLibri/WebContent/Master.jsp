@@ -76,6 +76,7 @@
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="listaLibri.jsp">Aggiungi libro esistente</a></li>
 							<li><a href="addNewLibro.jsp">Aggiungi libro nuovo</a></li>
+							<li><a href="prestitoLibri.jsp">Libri in prestito</a></li>
 							<li><a href="#">Ricerca libro</a></li>
 						</ul></li>
 
@@ -84,7 +85,7 @@
 							utenti <span class="caret"></span>
 					</a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#">Visualiza utenti vicini</a></li>
+							<li><a href="listaUtenti.jsp">Visualiza utenti vicini</a></li>
 							<li><a href="#">Ricerca utente</a></li>
 						</ul></li>
 					<li><a href="#about">Statistiche</a></li>

@@ -53,7 +53,35 @@ public class MyQuery {
 	public static String qSelIdLibro = " select id from ing_libro where nome = ?";
 	
 	public static String qSelCategorie = " select nome from ing_categoria order by 1";
-			  
+	
+	public static String qSelUtenti = " select * from ing_utente where email <> ?";
+	
+	public static String qSelUtente = " select * from ing_utente where email = ? ";
+	
+	public static String qSelPrestitiPending = " select p.id,p.email_utente_mittente,p.email_utente_destinatario,p.id_libro,p.data_i,p.data_f,p.stato,l.nome as nome_libro "
+											 + " from ing_prestito p join ing_libro l on p.id_libro = l.id "
+											 + " where p.email_utente_destinatario = ? and p.stato = 'R'";
+	
+	public static String qSelPrestitiIN =  " select p.id,p.email_utente_mittente,p.email_utente_destinatario,p.id_libro,p.data_i,p.data_f,p.stato,l.nome as nome_libro "
+										 + " from ing_prestito p join ing_libro l on p.id_libro = l.id "
+										 + " where p.email_utente_destinatario = ? and p.stato = 'A'";
+	
+	public static String qSelPrestitiOUT = " select p.id,p.email_utente_mittente,p.email_utente_destinatario,p.id_libro,p.data_i,p.data_f,p.stato,l.nome as nome_libro "
+			 							 + " from ing_prestito p join ing_libro l on p.id_libro = l.id "		
+			 							 + " where p.email_utente_mittente = ? and p.stato = 'A'";
+	
+	public static String qInsertRichiestaPrestito = " insert into ing_prestito (id, email_utente_mittente, email_utente_destinatario, id_libro, data_i, data_f, stato) values " +
+												   " ((select max(id)+1 from ing_prestito), ?, ?, ?, ?,?,'R')";
+	
+	public static String qUpdPossessoOK = " update ing_prestito set stato = 'A' "
+										+ " where email_utente_mittente = ? and "
+										+ " email_utente_destinatario = ? "
+										+ " and id_libro = ?";
+	
+	public static String qUpdPossessoNO = " update ing_prestito set stato = 'D' "
+										+ " where email_utente_mittente = ? and "
+										+ " email_utente_destinatario = ? "
+										+ " and id_libro = ?";
 	
 	public static String getqSelectTuttiLibri() {
 		return qSelectTuttiLibri;

@@ -23,7 +23,7 @@ public class GeoTools {
 		return res;
 	}
 	
-	public double getDistance(int latitudine1, int longitudine1, int latitudine2, int longitudine2){
+	public static double getDistance(int latitudine1, int longitudine1, int latitudine2, int longitudine2){
 	
 		
 		

@@ -11,6 +11,10 @@ import java.io.PrintWriter;
 import java.io.ObjectInputStream.GetField;
 //import java.io.Reader;
 import java.net.InetAddress;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 //import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -480,59 +484,12 @@ public class Tools {
 		System.out.println("Record in tabella: "+tabella.length);
 	}
 	
-	/**
-	 * metodo che ritorna Data e Ora correnti
-	 * @return
-	 */
-	public String getDataOra(){
-		Calendar cal = new GregorianCalendar();
-		int giorno = cal.get(Calendar.DAY_OF_MONTH);
-		int mese = cal.get(Calendar.MONTH)+1;
-		int anno = cal.get(Calendar.YEAR);
-		String orario;
-		int ore = cal.get(Calendar.HOUR);
-		int minuti = cal.get(Calendar.MINUTE);
-		int secondi = cal.get(Calendar.SECOND);
-
-		if(cal.get(Calendar.AM_PM) == 0)
-			orario = "A.M.";
-		else
-			orario = "P.M.";
+	public static java.util.Date getDate() throws ParseException {
+		java.util.Date today = (java.util.Date) Calendar.getInstance().getTime();
+		return (java.util.Date) today;
 		
-		String giornoString="";
-		String meseString="";
-		String oreString="";
-		String minutiString="";
-		String secondiString="";
-		
-		if (giorno < 10)
-			giornoString = "0"+giorno;
-		else
-			giornoString= ""+giorno;
-		
-		if (mese < 10)
-			meseString = "0"+mese;
-		else
-			meseString= ""+mese;
-		
-		if (ore < 10)
-			oreString = "0"+ore;
-		else
-			oreString= ""+ore;
-		
-		if (minuti < 10)
-			minutiString = "0"+minuti;
-		else
-			minutiString= ""+minuti;
-		
-		if (secondi < 10)
-			giornoString = "0"+giorno;
-		else
-			secondiString= ""+secondi;
-		
-		String dataOra = anno + "/" + meseString + "/" + giornoString + " - " +oreString + ":" + minutiString + ":" + secondiString + " " + orario;
-		return dataOra;
-	}
+	
+    }
 	
 	/**
 	 * metodo che scrive sul file di logStatus

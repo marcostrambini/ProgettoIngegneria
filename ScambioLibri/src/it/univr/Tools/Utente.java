@@ -3,7 +3,7 @@ package it.univr.Tools;
 import java.sql.Date;
 import java.util.ArrayList;
 
-public class Utente {
+public class Utente implements Comparable<Utente>{
 	
 	private String email;
 	private String nome;
@@ -15,6 +15,7 @@ public class Utente {
 	private String password;
 	private String descrizione;
 	private ArrayList<Libro> listaLibriUtente;
+	private double distanza;
 	
 	public Utente(){
 		this.nome = null;
@@ -27,6 +28,7 @@ public class Utente {
 		this.stato = null;
 		this.descrizione = null;
 		this.listaLibriUtente = null;
+		this.distanza = 0;
 	}
 	
 	
@@ -133,6 +135,23 @@ public class Utente {
 
 	public void setDescrizione(String descrizione) {
 		this.descrizione = descrizione;
+	}
+
+
+	public double getDistanza() {
+		return distanza;
+	}
+
+
+	public void setDistanza(double distanza) {
+		this.distanza = distanza;
+	}
+
+
+	@Override
+	public int compareTo(Utente o) {
+		// TODO Auto-generated method stub
+		return (int) (distanza - o.getDistanza());
 	}
 
 	

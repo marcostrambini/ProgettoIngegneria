@@ -1,9 +1,11 @@
 package it.univr.Servlet;
 
 import it.univr.Database.DataSource;
+import it.univr.Tools.Libro;
 import it.univr.Tools.Utente;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,7 +38,8 @@ public class BookServlet extends HttpServlet {
 
 		System.out.println("Sono nel metodo get");
 		String act = request.getParameter("act");
-		int idLibro = Integer.parseInt(request.getParameter("id"));
+		String email = null;
+		int idLibro = 0;
 		Utente utente = (Utente) session.getAttribute("utente");
 		
 		switch(act){
@@ -44,6 +47,7 @@ public class BookServlet extends HttpServlet {
 		case "al": System.out.println("caso di aggiunta libro ad utente");
 			try {
 				DataSource ds = new DataSource();
+				idLibro = Integer.parseInt(request.getParameter("id"));
 				System.out.println("email: " +utente.getEmail());
 				System.out.println("id libro: "+idLibro);
 				ds.setUserBook(utente.getEmail(), idLibro );
@@ -52,11 +56,13 @@ public class BookServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			response.sendRedirect("userPagePrivate.jsp");
 		break;
 		
 		case "dl": System.out.println("caso di delete libro da utente");
 		try {
 			DataSource ds = new DataSource();
+			idLibro = Integer.parseInt(request.getParameter("id"));
 			System.out.println("email: " +utente.getEmail());
 			System.out.println("id libro: "+idLibro);
 			ds.delUserBook(utente.getEmail(), idLibro );
@@ -65,21 +71,70 @@ public class BookServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		response.sendRedirect("userPagePrivate.jsp");
 		break;
 		
+		case "su": System.out.println("caso seleziona utente ");
+		try {
+			DataSource ds = new DataSource();
+			email = request.getParameter("email");
+			Utente utenteSelezionato = ds.getUtente(email);
+			session.setAttribute("utenteSelezionato", utenteSelezionato);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+			
+		response.sendRedirect("userPagePublic.jsp");
+		break;
 		
+		case "rp": System.out.println("caso richiesta prestito libro ");
+		try {
+			DataSource ds = new DataSource();
+			String emailDest = request.getParameter("emailDest");
+			idLibro = Integer.parseInt(request.getParameter("idLibro"));
+			ds.insertRichiestPrestito(utente.getEmail(), emailDest, idLibro);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("userPagePrivate.jsp");
+		break;
 		
+		case "pok": System.out.println("caso prestito accettato ");
+		try {
+			DataSource ds = new DataSource();
+			String emailMittente = request.getParameter("emailMittente");
+			idLibro = Integer.parseInt(request.getParameter("idLibro"));
+			ds.updPrestitoOK(emailMittente, utente.getEmail(), idLibro);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("userPagePrivate.jsp");
+		break;
 		
+		case "pno": System.out.println("caso prestito rifiutato ");
+		try {
+			DataSource ds = new DataSource();
+			String emailMittente = request.getParameter("emailMittente");
+			idLibro = Integer.parseInt(request.getParameter("idLibro"));
+			ds.updPrestitoNO(emailMittente, utente.getEmail(), idLibro);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("userPagePrivate.jsp");
+		break;
 		
 		}
 		
 		
 		
 		
-		String test = request.getParameter("id");
-		System.out.println("id ="+test);
+
 		
-		response.sendRedirect("userPagePrivate.jsp");
+		
 	}
 
 	/**
