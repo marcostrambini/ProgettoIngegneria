@@ -50,7 +50,7 @@
 %>
 
 
-	<nav class="navbar navbar-inverse">
+	<nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom:50px">
 		<div class="container-fluid">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header">
@@ -76,8 +76,8 @@
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="listaLibri.jsp">Aggiungi libro esistente</a></li>
 							<li><a href="addNewLibro.jsp">Aggiungi libro nuovo</a></li>
-							<li><a href="prestitoLibri.jsp">Libri in prestito</a></li>
-							<li><a href="#">Ricerca libro</a></li>
+							<li><a href="prestitoLibri.jsp">Gestione prestiti</a></li>
+							<li><a href="ricercaLibri.jsp">Ricerca libro</a></li>
 						</ul></li>
 
 					<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -86,9 +86,9 @@
 					</a>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="listaUtenti.jsp">Visualiza utenti vicini</a></li>
-							<li><a href="#">Ricerca utente</a></li>
+							
 						</ul></li>
-					<li><a href="#about">Statistiche</a></li>
+					
 				</ul>
 
 
@@ -107,6 +107,10 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+	
+	<br>
+	<br>
+	<br>
 
 
 

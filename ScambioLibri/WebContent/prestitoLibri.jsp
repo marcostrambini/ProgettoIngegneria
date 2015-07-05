@@ -41,6 +41,7 @@ $(document).ready( function () {
 DataSource ds = new DataSource();
 Utente utente = (Utente) session.getAttribute("utente");
 ArrayList<Prestito> prestitiPending =  ds.getPrestitiPending(utente.getEmail());
+ArrayList<Prestito> prestitiPendingMie =  ds.getPrestitiPendingMie(utente.getEmail());
 ArrayList<Prestito> prestitiIN =  ds.getPrestitiIN(utente.getEmail());
 ArrayList<Prestito> prestitiOUT =  ds.getPrestitiOUT(utente.getEmail());
 %>
@@ -55,44 +56,32 @@ ArrayList<Prestito> prestitiOUT =  ds.getPrestitiOUT(utente.getEmail());
 
 <div class="row" >
 <div class="container">
-<h5>Richieste di prestito</h5>
+<h5>Richieste di prestito di altri utenti</h5>
 <table class="table">
-    
     <tbody>
-    
-    
 <% for(int i=0; i<prestitiPending.size();i++){ %>
         <tr>
-        	
-            <td>L'utente <a href="BookServlet?act=su&email= <%=prestitiPending.get(i).getEmail_utente_mittente() %>">
-            <%=prestitiPending.get(i).getEmail_utente_mittente() %> </a>
-            
-            richiede in prestito il libro <%=prestitiPending.get(i).getNome_libro() %></td>
+            <td>L'utente <b><%=prestitiPending.get(i).getEmail_utente_mittente() %></b> 
+            richiede in prestito il libro <b><%=prestitiPending.get(i).getNome_libro() %></b></td>
             <td><a href="BookServlet?act=pok&emailMittente=<%=prestitiPending.get(i).getEmail_utente_mittente() %>&idLibro=<%=prestitiPending.get(i).getIdLibro() %>" ><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a> </td>
         	<td><a href="BookServlet?act=pno&emailMittente=<%=prestitiPending.get(i).getEmail_utente_mittente() %>&idLibro=<%=prestitiPending.get(i).getIdLibro() %>" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </td>
         </tr>
-      
-      
       <% }%>
-        
-   
     </tbody>
 </table>
-
-
-
 </div>
 </div>
 
 <div class="row" >
 <div class="container">
-<h5>Miei libri in prestito da</h5>
+<h5>Mie richieste ad altri utenti</h5>
 <table class="table">
     <tbody>
-<% for(int i=0; i<prestitiIN.size();i++){ %>
+<% for(int i=0; i<prestitiPendingMie.size();i++){ %>
         <tr>
-            <td>Il mio libro <b><%=prestitiIN.get(i).getNome_libro()%></b> e' in prestito a <b><%=prestitiIN.get(i).getEmail_utente_mittente()%></b> dal <%=prestitiIN.get(i).getData_i() %></td>
-            <td><a href="BookServlet?act=su&email=" ><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a> </td>
+            <td>La richiesta per <b><%=prestitiPendingMie.get(i).getNome_libro() %></b> fatta a <b><%=prestitiPendingMie.get(i).getEmail_utente_destinatario() %></b> 
+            e' in attesa di risposta </td>
+        	<td><a href="BookServlet?act=pr&emailMittente=<%=prestitiPendingMie.get(i).getEmail_utente_destinatario() %>&idLibro=<%=prestitiPendingMie.get(i).getIdLibro() %>" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a> </td>
         </tr>
       <% }%>
     </tbody>
@@ -108,13 +97,35 @@ ArrayList<Prestito> prestitiOUT =  ds.getPrestitiOUT(utente.getEmail());
 <% for(int i=0; i<prestitiOUT.size();i++){ %>
         <tr>
             <td>Il libro <b><%=prestitiOUT.get(i).getNome_libro() %></b> mi e' stato prestito da <b><%=prestitiOUT.get(i).getEmail_utente_destinatario() %></b> il <%=prestitiOUT.get(i).getData_i() %></td>
-            <td><a href="BookServlet?act=su&email=" ><span class="glyphicon glyphicon-log-in" aria-hidden="true"></span></a> </td>
+            <td><a href="BookServlet?act=pr&emailMittente=<%=prestitiOUT.get(i).getEmail_utente_destinatario() %>&idLibro=<%=prestitiOUT.get(i).getIdLibro() %>" ><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span></a> </td>
         </tr>
       <% }%>
     </tbody>
 </table>
 </div>
 </div>
+
+<div class="row" >
+<div class="container">
+<h5>Miei libri in prestito da</h5>
+<table class="table">
+    <tbody>
+<% for(int i=0; i<prestitiIN.size();i++){ %>
+        <tr>
+            <td>Il mio libro <b><%=prestitiIN.get(i).getNome_libro()%></b> e' in prestito a <b><%=prestitiIN.get(i).getEmail_utente_mittente()%></b> dal <%=prestitiIN.get(i).getData_i() %></td>
+            <td> <a href="BookServlet?act=pno&emailMittente=<%=prestitiIN.get(i).getEmail_utente_mittente() %>&idLibro=<%=prestitiIN.get(i).getIdLibro() %>" ><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span></a> </td>
+            
+            
+            
+            
+        </tr>
+      <% }%>
+    </tbody>
+</table>
+</div>
+</div>
+
+
    
 </body>
 </html>

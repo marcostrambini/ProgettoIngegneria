@@ -31,7 +31,9 @@ public class MyQuery {
 	/**
 	 * ritorna le info di tutti i libri nel db
 	 */
-	public static String qSelectTuttiLibri = " select l.*,c.nome as nome_categoria from ing_libro l join ing_categoria c on l.categoria = c.id order by nome" ;
+	public static String qSelectTuttiLibri = " select l.*,c.nome as nome_categoria from ing_libro l join ing_categoria c on l.categoria = c.id where l.stato = 'A' order by nome" ;
+	
+	public static String qSelectTuttiLibriD = " select l.*,c.nome as nome_categoria from ing_libro l join ing_categoria c on l.categoria = c.id where l.stato = 'D' order by nome" ;
 	
 	public static String qSelectTuttiLibriNotUtente = " select l.*,c.nome as nome_categoria " +
 														" from ing_libro l join ing_categoria c on l.categoria = c.id " + 
@@ -56,11 +58,20 @@ public class MyQuery {
 	
 	public static String qSelUtenti = " select * from ing_utente where email <> ?";
 	
+	public static String qSelUtentiLibro = " select u.* from ing_utente u join ing_possessolibro p "
+			  							 + " on u.email = p.email_utente join ing_libro l "
+			  							 + " on p.id_libro = l.id "
+			  							 + " where p.id_libro = ? and u.email <> ?";
+	
 	public static String qSelUtente = " select * from ing_utente where email = ? ";
 	
 	public static String qSelPrestitiPending = " select p.id,p.email_utente_mittente,p.email_utente_destinatario,p.id_libro,p.data_i,p.data_f,p.stato,l.nome as nome_libro "
 											 + " from ing_prestito p join ing_libro l on p.id_libro = l.id "
 											 + " where p.email_utente_destinatario = ? and p.stato = 'R'";
+	
+	public static String qSelPrestitiPendingMie = " select p.id,p.email_utente_mittente,p.email_utente_destinatario,p.id_libro,p.data_i,p.data_f,p.stato,l.nome as nome_libro "
+											    + " from ing_prestito p join ing_libro l on p.id_libro = l.id "
+											    + " where p.email_utente_mittente = ? and p.stato = 'R'";
 	
 	public static String qSelPrestitiIN =  " select p.id,p.email_utente_mittente,p.email_utente_destinatario,p.id_libro,p.data_i,p.data_f,p.stato,l.nome as nome_libro "
 										 + " from ing_prestito p join ing_libro l on p.id_libro = l.id "
@@ -73,15 +84,23 @@ public class MyQuery {
 	public static String qInsertRichiestaPrestito = " insert into ing_prestito (id, email_utente_mittente, email_utente_destinatario, id_libro, data_i, data_f, stato) values " +
 												   " ((select max(id)+1 from ing_prestito), ?, ?, ?, ?,?,'R')";
 	
-	public static String qUpdPossessoOK = " update ing_prestito set stato = 'A' "
+	public static String qUpdPossessoOK = " update ing_prestito set stato = 'A' ,data_i = ?"
 										+ " where email_utente_mittente = ? and "
 										+ " email_utente_destinatario = ? "
 										+ " and id_libro = ?";
 	
-	public static String qUpdPossessoNO = " update ing_prestito set stato = 'D' "
+	public static String qUpdPossessoNO = " update ing_prestito set stato = 'D', data_f = ? "
 										+ " where email_utente_mittente = ? and "
 										+ " email_utente_destinatario = ? "
 										+ " and id_libro = ?";
+	
+	public static String qDisableUser = " update ing_utente set stato = 'D' where email = ?";
+	
+	public static String qEnableUser = " update ing_utente set stato = 'A' where email = ?";
+	
+	public static String qDisableBook = " update ing_libro set stato = 'D' where id = ?";
+	
+	public static String qEnableBook = " update ing_libro set stato = 'A' where id = ?";
 	
 	public static String getqSelectTuttiLibri() {
 		return qSelectTuttiLibri;

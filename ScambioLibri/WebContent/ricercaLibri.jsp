@@ -40,7 +40,7 @@ $(document).ready( function () {
 <%
 DataSource ds = new DataSource();
 Utente utente = (Utente) session.getAttribute("utente");
-ArrayList<Utente> listaUtentiVicini = ds.getListaUtentiVicini(utente.getEmail(), utente.getLatitudine(), utente.getLongitudine());
+ArrayList<Libro> listaLibri = ds.getListaLibri(utente.getEmail());
 
 %>
 
@@ -57,25 +57,23 @@ ArrayList<Utente> listaUtentiVicini = ds.getListaUtentiVicini(utente.getEmail(),
 <table id="table_id" class="display">
     <thead>
         <tr>
-            <th>id</th>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Email</th>
-            <th>Indirizzo</th>
-            <th>Distanza</th>
+            <th></th>
+            <th>immagine libro</th>
+            <th>titolo</th>
+            <th>autore</th>
+            <th>categoria</th>
         </tr>
     </thead>
     <tbody>
     
     
-<% for(int i=0; i<listaUtentiVicini.size();i++){ %>
+<% for(int i=0; i<listaLibri.size();i++){ %>
         <tr>
-        	<td><a href="BookServlet?act=su&email=<%=listaUtentiVicini.get(i).getEmail() %>" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a> </td>
-            <td><%=listaUtentiVicini.get(i).getNome() %></td>
-            <td><%=listaUtentiVicini.get(i).getCognome() %> </td>
-            <td><%=listaUtentiVicini.get(i).getEmail() %> </td>
-            <td><%=listaUtentiVicini.get(i).getIndirizzo() %> </td>
-            <td><%=listaUtentiVicini.get(i).getDistanza() %> </td>
+        	<td><a href="BookServlet?act=ru&id=<%=listaLibri.get(i).getId() %>" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a> </td>
+            <td><a href=<%=listaLibri.get(i).getPath_img() %>><img alt="" src=<%=listaLibri.get(i).getPath_img() %> height="150" width="100"></a></td>
+            <td><%=listaLibri.get(i).getNome() %> </td>
+            <td><%=listaLibri.get(i).getAutore() %> </td>
+            <td><%=listaLibri.get(i).getCategoria() %> </td>
         </tr>
       
       

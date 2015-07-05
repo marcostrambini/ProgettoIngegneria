@@ -40,15 +40,16 @@ $(document).ready( function () {
 <%
 DataSource ds = new DataSource();
 Utente utente = (Utente) session.getAttribute("utente");
-ArrayList<Utente> listaUtentiVicini = ds.getListaUtentiVicini(utente.getEmail(), utente.getLatitudine(), utente.getLongitudine());
-
+ArrayList<Utente> listaUtentiVicini = (ArrayList<Utente>) session.getAttribute("listaUtentiLibro");
+String nomeLibro = request.getParameter("nomeLibro");
+int idLibro = Integer.parseInt(request.getParameter("idLibro"));
 %>
 
 
 
 <div class="row" >
 <div class="container">
-<h4>Seleziona tra i libri esistenti nel database</h4>
+<h4>Lista di utenti che possiedono il libro: <b><%=nomeLibro %></b></h4>
 </div>
 </div>
 
@@ -70,7 +71,8 @@ ArrayList<Utente> listaUtentiVicini = ds.getListaUtentiVicini(utente.getEmail(),
     
 <% for(int i=0; i<listaUtentiVicini.size();i++){ %>
         <tr>
-        	<td><a href="BookServlet?act=su&email=<%=listaUtentiVicini.get(i).getEmail() %>" ><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a> </td>
+     
+        	<td><a href="BookServlet?act=rp&idLibro=<%=idLibro %>&emailDest=<%=listaUtentiVicini.get(i).getEmail() %>" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> </td>
             <td><%=listaUtentiVicini.get(i).getNome() %></td>
             <td><%=listaUtentiVicini.get(i).getCognome() %> </td>
             <td><%=listaUtentiVicini.get(i).getEmail() %> </td>

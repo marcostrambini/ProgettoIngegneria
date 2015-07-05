@@ -72,7 +72,7 @@ utenteSelezionato = (Utente) session.getAttribute("utenteSelezionato");
 						Nome: 
 						</td>
 						<td>
-						<%=utenteSelezionato.getNome()+" "+utente.getCognome() %>
+						<%=utenteSelezionato.getNome()+" "+utenteSelezionato.getCognome() %>
 						</td>
 					</tr>
 					<tr>

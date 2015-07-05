@@ -127,7 +127,90 @@ public class BookServlet extends HttpServlet {
 		response.sendRedirect("userPagePrivate.jsp");
 		break;
 		
+		case "pr": System.out.println("caso prestito restituito al mittente ");
+		try {
+			DataSource ds = new DataSource();
+			String emailMittente = request.getParameter("emailMittente");
+			idLibro = Integer.parseInt(request.getParameter("idLibro"));
+			ds.updPrestitoNO(utente.getEmail(),emailMittente ,idLibro);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		response.sendRedirect("userPagePrivate.jsp");
+		break;
+		
+		case "ru": System.out.println("caso ricerca utenti che hanno un determinato libro ");
+		String nomeLibro = "";
+		try {
+			DataSource ds = new DataSource();
+			
+			idLibro = Integer.parseInt(request.getParameter("id"));
+			ArrayList<Utente> listaUtentiLibro = ds.getListaUtentiViciniLibroScelto(utente.getEmail(), utente.getLatitudine(), utente.getLongitudine(), idLibro);
+			session.setAttribute("listaUtentiLibro", listaUtentiLibro);
+			nomeLibro = ds.getNomeLibro(idLibro);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("listaUtentiLibro.jsp?nomeLibro="+nomeLibro+"&idLibro="+idLibro);
+		break;
+		
+		case "du": System.out.println("caso disabilitazione utente da admin ");
+		try {
+			DataSource ds = new DataSource();
+			email = request.getParameter("email");
+			ds.disableUser(email);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("admin.jsp");
+		break;
+		
+		case "au": System.out.println("caso abilitazione utente da admin ");
+		try {
+			DataSource ds = new DataSource();
+			email = request.getParameter("email");
+			ds.enableUser(email);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("admin.jsp");
+		break;
+		
+		case "db": System.out.println("caso disabilitazione libro da admin ");
+		try {
+			DataSource ds = new DataSource();
+			idLibro = Integer.parseInt(request.getParameter("idLibro"));
+			ds.disableBook(idLibro);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("admin.jsp");
+		break;
+		
+		case "ab": System.out.println("caso abilitazione libro da admin ");
+		try {
+			DataSource ds = new DataSource();
+			idLibro = Integer.parseInt(request.getParameter("idLibro"));
+			ds.enableBook(idLibro);
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		response.sendRedirect("admin.jsp");
+		break;
+		
+		
+		}
+		
 		
 		
 		

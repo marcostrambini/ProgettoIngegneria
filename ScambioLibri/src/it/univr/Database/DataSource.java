@@ -186,196 +186,6 @@ public class DataSource implements Serializable {
       return bean;
   }
   
-  // ===========================================================================
-
-  /**
-   * Metodo per il recupero delle informazioni del corso di studi con l'id
-   * specificato.
-   *
-   * @param id
-   * @return
-   */
-//  public CorsoStudi getCorsoStudi( int id ) {
-//    // Dichiarazione delle variabili necessarie
-//    Connection con = null;
-//    PreparedStatement pstmt = null;
-//    ResultSet rs = null;
-//    CorsoStudi result = null;
-//    try {
-//      // tentativo di connessione al database
-//      con = DriverManager.getConnection( url, user, passwd );
-//      // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
-//      pstmt = con.prepareStatement( cs );
-//      pstmt.clearParameters();
-//      // imposto i parametri della query
-//      pstmt.setInt( 1, id );
-//      // eseguo la query
-//      rs = pstmt.executeQuery();
-//      // memorizzo il risultato dell'interrogazione in Vector di Bean
-//      if( rs.next() ) {
-//        result = makeCorsoStudiBean( rs );
-//      }
-//
-//    } catch( SQLException sqle ) { // Catturo le eventuali eccezioni
-//      sqle.printStackTrace();
-//
-//    } finally { // alla fine chiudo la connessione.
-//      try {
-//        con.close();
-//      } catch( SQLException sqle1 ) {
-//        sqle1.printStackTrace();
-//      }
-//    }
-//    return result;
-//  }
-
-
-  /**
-   * Metodo per il recupero delle principali informazioni di tutti i corsi di
-   * studi
-   *
-   * @return
-   */
-//  public List<CorsoStudi> getCorsiStudi() {
-//    // dichiarazione delle variabili
-//    Connection con = null;
-//    Statement stmt = null;
-//    ResultSet rs = null;
-//    List<CorsoStudi> result = new ArrayList<CorsoStudi>();
-//
-//    try {
-//      // tentativo di connessione al database
-//      con = DriverManager.getConnection( url, user, passwd );
-//      // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
-//      stmt = con.createStatement();
-//      // eseguo l'interrogazione desiderata
-//      rs = stmt.executeQuery( css );
-//      // memorizzo il risultato dell'interrogazione nel Vector
-//      while( rs.next() ) {
-//        result.add( makeCSBean( rs ) );
-//      }
-//
-//    } catch( SQLException sqle ) { // catturo le eventuali eccezioni!
-//      sqle.printStackTrace();
-//
-//    } finally { // alla fine chiudo la connessione.
-//      try {
-//        con.close();
-//      } catch( SQLException sqle1 ) {
-//        sqle1.printStackTrace();
-//      }
-//    }
-//    return result;
-//  }
-
-  /**
-   * Metodo per il recupero della/e facolta' di appartenenza del corso di studi
-   * con l'id specificato.
-   *
-   * @param id
-   * @return
-   */
-//  public String getFacoltaCorso( int id ) {
-//    // dichiarazione delle variabili
-//    Connection con = null;
-//    PreparedStatement pstmt = null;
-//    ResultSet rs = null;
-//    String result = null;
-//
-//    try {
-//      // tentativo di connessione al database
-//      con = DriverManager.getConnection( url, user, passwd );
-//      // Connessione riuscita, ottengo l'oggetto per l'esecuzione
-//      // dell'interrogazione.
-//      pstmt = con.prepareStatement( csf );
-//      pstmt.clearParameters();
-//      pstmt.setInt( 1, id );
-//      rs = pstmt.executeQuery();
-//
-//      // memorizzo il risultato dell'interrogazione nel Bean
-//      if( rs.next() ) {
-//        result = rs.getString( "Nome" );
-//      }
-//
-//    } catch( SQLException sqle ) { // catturo le eventuali eccezioni!
-//      sqle.printStackTrace();
-//
-//    } finally { // alla fine chiudo la connessione.
-//      try {
-//        con.close();
-//      } catch( SQLException sqle1 ) {
-//        sqle1.printStackTrace();
-//      }
-//    }
-//    return result;
-//  }
-//  
-//  public List<PresideFacolta> getPresideFacolta() {
-//	    // dichiarazione delle variabili
-//	    Connection con = null;
-//	    Statement stmt = null;
-//	    ResultSet rs = null;
-//	    List<PresideFacolta> result = new ArrayList<PresideFacolta>();
-//
-//	    try {
-//	      // tentativo di connessione al database
-//	      con = DriverManager.getConnection( url, user, passwd );
-//	      // connessione riuscita, ottengo l'oggetto per l'esecuzione dell'interrogazione.
-//	      stmt = con.createStatement();
-//	      // eseguo l'interrogazione desiderata
-//	      rs = stmt.executeQuery( q2 );
-//	      // memorizzo il risultato dell'interrogazione nel Vector
-//	      while( rs.next() ) {
-//	        result.add( makePFBean( rs ) );
-//	      }
-//
-//	    } catch( SQLException sqle ) { // catturo le eventuali eccezioni!
-//	      sqle.printStackTrace();
-//
-//	    } finally { // alla fine chiudo la connessione.
-//	      try {
-//	        con.close();
-//	      } catch( SQLException sqle1 ) {
-//	        sqle1.printStackTrace();
-//	      }
-//	    }
-//	    return result;
-//	  }
-//  
-//  public String getDettaglioPreside( String nomef ) {
-//	    // dichiarazione delle variabili
-//	    Connection con = null;
-//	    PreparedStatement pstmt = null;
-//	    ResultSet rs = null;
-//	    String result = null;
-//
-//	    try {
-//	      // tentativo di connessione al database
-//	      con = DriverManager.getConnection( url, user, passwd );
-//	      // Connessione riuscita, ottengo l'oggetto per l'esecuzione
-//	      // dell'interrogazione.
-//	      pstmt = con.prepareStatement( dettaglioPreside );
-//	      pstmt.clearParameters();
-//	      pstmt.setString( 1, nomef );
-//	      rs = pstmt.executeQuery();
-//
-//	      // memorizzo il risultato dell'interrogazione nel Bean
-//	      if( rs.next() ) {
-//	        result = rs.getString( "nomep" ) + " "+rs.getString("cognomep");
-//	      }
-//
-//	    } catch( SQLException sqle ) { // catturo le eventuali eccezioni!
-//	      sqle.printStackTrace();
-//
-//	    } finally { // alla fine chiudo la connessione.
-//	      try {
-//	        con.close();
-//	      } catch( SQLException sqle1 ) {
-//	        sqle1.printStackTrace();
-//	      }
-//	    }
-//	    return result;
-//	  }
   
   /**
    * ritorna la lista di tutti i libri presenti nel db
@@ -392,6 +202,32 @@ public class DataSource implements Serializable {
 	  try {
 		stm = con.createStatement();
 		rs = stm.executeQuery(MyQuery.getqSelectTuttiLibri());
+		while(rs.next())
+			result.add(makeLibroBean(rs));
+		
+	  } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  
+	  return result;
+  }
+  
+  /**
+   * seleziona tutti i libri disabilitati
+   * @return
+   */
+  public ArrayList<Libro> getListaLibriD(){
+	  Connection con = null;
+	  Statement stm = null;
+	  ResultSet rs = null;
+	  ArrayList<Libro> result = new ArrayList<Libro>();
+	  
+	  con = getConnection();
+	  
+	  try {
+		stm = con.createStatement();
+		rs = stm.executeQuery(MyQuery.qSelectTuttiLibriD);
 		while(rs.next())
 			result.add(makeLibroBean(rs));
 		
@@ -460,6 +296,13 @@ public class DataSource implements Serializable {
 	  return result;
   }
   
+  /**
+   * lista di utenti in ordine di distanza dall'utente loggato
+   * @param email
+   * @param latitudine
+   * @param longitudine
+   * @return
+   */
   public ArrayList<Utente> getListaUtentiVicini(String email, int latitudine, int longitudine){
 	  Connection con = null;
 	  PreparedStatement pstm = null;
@@ -488,6 +331,79 @@ public class DataSource implements Serializable {
   }
   
   /**
+   * restituisce la lista di tutti gli utenti abilitati
+   * @return
+   */
+  public ArrayList<Utente> getListaUtentiA(){
+	  Connection con = null;
+	  Statement stm = null;
+	  ResultSet rs = null;
+	  ArrayList<Utente> result = new ArrayList<Utente>();
+	  con = getConnection();
+	  try {
+		stm = con.createStatement();
+		rs = stm.executeQuery("select * from ing_utente where stato = 'A' order by cognome");
+		while(rs.next())
+			result.add(makeUserBean(rs));
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  return result;
+  }
+  
+  /**
+   * restituisce la lista degli utenti disabilitati
+   * @return
+   */
+  public ArrayList<Utente> getListaUtentiD(){
+	  Connection con = null;
+	  Statement stm = null;
+	  ResultSet rs = null;
+	  ArrayList<Utente> result = new ArrayList<Utente>();
+	  con = getConnection();
+	  try {
+		stm = con.createStatement();
+		rs = stm.executeQuery("select * from ing_utente where stato = 'D' order by cognome");
+		while(rs.next())
+			result.add(makeUserBean(rs));
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  return result;
+  }
+  
+  public ArrayList<Utente> getListaUtentiViciniLibroScelto(String email, int latitudine, int longitudine, int idLibro){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  ArrayList<Utente> result = new ArrayList<Utente>();
+	  
+	  con = getConnection();
+	  
+	  try {
+		
+		pstm = con.prepareStatement(MyQuery.qSelUtentiLibro);
+		pstm.setInt(1, idLibro);
+		pstm.setString(2, email);
+		rs = pstm.executeQuery();
+		while(rs.next())
+			result.add(makeUserBeanDistanza(rs, latitudine, longitudine));
+		
+		Collections.sort(result);
+		
+	  } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	  
+	  return result;
+  }
+  
+  /**
    * metodo per verificare il login
    * @param email
    * @param password
@@ -499,7 +415,7 @@ public class DataSource implements Serializable {
 	  ResultSet rs = null;
 	  Utente result = null;
 	 
-	  
+	 
 	  try {
 		 con = getConnection();
 		pstm = con.prepareStatement(MyQuery.qLogin);
@@ -743,12 +659,43 @@ public class DataSource implements Serializable {
 	  PreparedStatement pstm = null;
 	  ResultSet rs = null;
 	  ArrayList<Prestito> result = new ArrayList<Prestito>();
-	 	  
 	  try {
 		con = getConnection();
 		pstm = con.prepareStatement(MyQuery.qSelPrestitiPending);
 		pstm.setString(1, email);
-	
+		rs = pstm.executeQuery();
+		while(rs.next()){
+			result.add( makePrestitoBean(rs));
+		}
+	} catch (SQLException e) {
+		
+		e.printStackTrace();
+	}finally{
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  return result;
+	  
+  }
+  
+  /**
+   * richieste di prestito che ho fatto e sono ancora in sospeso
+   * @param email
+   * @return
+   */
+  public ArrayList<Prestito> getPrestitiPendingMie(String email){
+	  Connection con = null;
+	  PreparedStatement pstm = null;
+	  ResultSet rs = null;
+	  ArrayList<Prestito> result = new ArrayList<Prestito>();
+	  try {
+		con = getConnection();
+		pstm = con.prepareStatement(MyQuery.qSelPrestitiPendingMie);
+		pstm.setString(1, email);
 		rs = pstm.executeQuery();
 		while(rs.next()){
 			result.add( makePrestitoBean(rs));
@@ -865,13 +812,17 @@ public class DataSource implements Serializable {
 		  try {
 			con = getConnection();
 			pstm = con.prepareStatement(MyQuery.qUpdPossessoOK);
-			pstm.setString(1, email_mittente);
-			pstm.setString(2, email_destinatario);
-			pstm.setInt(3, idLibro);
+			pstm.setDate(1, new java.sql.Date(Tools.getDate().getTime()));
+			pstm.setString(2, email_mittente);
+			pstm.setString(3, email_destinatario);
+			pstm.setInt(4, idLibro);
 			pstm.execute();
 			
 		} catch (SQLException e) {
 			
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			try {
@@ -890,12 +841,13 @@ public class DataSource implements Serializable {
 		  try {
 			con = getConnection();
 			pstm = con.prepareStatement(MyQuery.qUpdPossessoNO);
-			pstm.setString(1, email_mittente);
-			pstm.setString(2, email_destinatario);
-			pstm.setInt(3, idLibro);
+			pstm.setDate(1, new java.sql.Date(Tools.getDate().getTime()));
+			pstm.setString(2, email_mittente);
+			pstm.setString(3, email_destinatario);
+			pstm.setInt(4, idLibro);
 			pstm.execute();
 			
-		} catch (SQLException e) {
+		} catch (SQLException | ParseException e) {
 			
 			e.printStackTrace();
 		}finally{
@@ -907,6 +859,137 @@ public class DataSource implements Serializable {
 			}
 		}  
 	}  
+
+	  public String getNomeLibro(int idLibro){
+		  Connection con = null;
+		  Statement stm = null;
+		  ResultSet rs = null;
+		  String result = null;
+		  try {
+			 con = getConnection();
+			stm = con.createStatement();
+			rs = stm.executeQuery("select nome from ing_libro where id = "+idLibro);
+			if(rs.next()){
+				result = rs.getString("nome");
+			}
+		
+		} catch (SQLException e) {
+			System.out.println("Problemi con il recupero dello user richiesto");
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		  return result;
+	  }
+	
+	  /**
+	   * disabilitazione di un utente da parte dell'admin
+	   * @param email
+	   */
+   public void disableUser(String email){
+	      Connection con = null;
+		  PreparedStatement pstm = null;
+		  try {
+			 con = getConnection();
+			pstm = con.prepareStatement(MyQuery.qDisableUser);
+			pstm.setString(1, email);
+			pstm.execute();
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+   
+   /**
+    * abilitazione di utente da parte dell'admin
+    * @param email
+    */
+   public void enableUser(String email){
+	      Connection con = null;
+		  PreparedStatement pstm = null;
+		  try {
+			 con = getConnection();
+			pstm = con.prepareStatement(MyQuery.qEnableUser);
+			pstm.setString(1, email);
+			pstm.execute();
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+   
+   /**
+    * disabilitazione libro da parte dell'utente
+    * @param idLibro
+    */
+   public void disableBook(int idLibro){
+	      Connection con = null;
+		  PreparedStatement pstm = null;
+		  try {
+			 con = getConnection();
+			pstm = con.prepareStatement(MyQuery.qDisableBook);
+			pstm.setInt(1,idLibro);
+			pstm.execute();
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+   
+   /**
+    * abilitazione libro da parte dell'admin
+    * @param idLibro
+    */
+   public void enableBook(int idLibro){
+	      Connection con = null;
+		  PreparedStatement pstm = null;
+		  try {
+			 con = getConnection();
+			pstm = con.prepareStatement(MyQuery.qEnableBook);
+			pstm.setInt(1,idLibro);
+			pstm.execute();
+		
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally{
+			try {
+				con.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	  
   /**
    * ritorna l'oggetto connessione al DAtaSource
