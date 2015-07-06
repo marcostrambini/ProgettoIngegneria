@@ -55,6 +55,7 @@ int idLibro = Integer.parseInt(request.getParameter("idLibro"));
 
 <div class="row" >
 <div class="container">
+<div class="table-responsive">
 <table id="table_id" class="display">
     <thead>
         <tr>
@@ -88,7 +89,7 @@ int idLibro = Integer.parseInt(request.getParameter("idLibro"));
 </table>
 
 
-
+</div>
 </div>
 </div>
    

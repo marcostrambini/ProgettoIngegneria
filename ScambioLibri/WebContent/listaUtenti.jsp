@@ -54,6 +54,7 @@ ArrayList<Utente> listaUtentiVicini = ds.getListaUtentiVicini(utente.getEmail(),
 
 <div class="row" >
 <div class="container">
+<div class="table-responsive">
 <table id="table_id" class="display">
     <thead>
         <tr>
@@ -86,7 +87,7 @@ ArrayList<Utente> listaUtentiVicini = ds.getListaUtentiVicini(utente.getEmail(),
 </table>
 
 
-
+</div>
 </div>
 </div>
    

@@ -54,6 +54,7 @@ ArrayList<Libro> listaLibri = ds.getListaLibri(utente.getEmail());
 
 <div class="row" >
 <div class="container">
+<div class="table-responsive">
 <table id="table_id" class="display">
     <thead>
         <tr>
@@ -84,7 +85,7 @@ ArrayList<Libro> listaLibri = ds.getListaLibri(utente.getEmail());
 </table>
 
 
-
+</div>
 </div>
 </div>
    

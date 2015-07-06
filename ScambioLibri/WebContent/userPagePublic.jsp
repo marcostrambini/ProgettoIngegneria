@@ -127,6 +127,7 @@ utenteSelezionato = (Utente) session.getAttribute("utenteSelezionato");
 <div class="row">
 <div class="container">
 <h4>I libri di: <%=utenteSelezionato.getNome()+" "+utenteSelezionato.getCognome() %></h4>
+<div class="table-responsive">
 <table id="table_id" class="display">
     <thead>
         <tr>
@@ -157,7 +158,7 @@ utenteSelezionato = (Utente) session.getAttribute("utenteSelezionato");
 </table>
 
 
-
+</div>
 </div>
 </div>
 

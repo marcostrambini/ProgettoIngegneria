@@ -126,6 +126,7 @@ String userLogged = (String) session.getAttribute("userLogged");
 <div class="row" >
 <div class="container">
 <h4>Utenti abilitati</h4>
+<div class="table-responsive">
 <table id="table_id" class="display">
     <thead>
         <tr>
@@ -150,10 +151,11 @@ String userLogged = (String) session.getAttribute("userLogged");
 </table>
 </div>
 </div>
-
+</div>
 <div class="row" >
 <div class="container">
 <h4>Utenti disabilitati</h4>
+<div class="table-responsive">
 <table id="table_id2" class="display">
     <thead>
         <tr>
@@ -178,6 +180,7 @@ String userLogged = (String) session.getAttribute("userLogged");
 </table>
 </div>
 </div>
+</div>
 
 <div class="row" >
 <div class="container">
@@ -188,6 +191,7 @@ String userLogged = (String) session.getAttribute("userLogged");
 <div class="row" >
 <div class="container">
 <h4>Libri abilitati</h4>
+<div class="table-responsive">
 <table id="table_id3" class="display">
     <thead>
         <tr>
@@ -211,10 +215,12 @@ String userLogged = (String) session.getAttribute("userLogged");
 </table>
 </div>
 </div>
+</div>
 
 <div class="row" >
 <div class="container">
 <h4>Libri disabilitati</h4>
+<div class="table-responsive">
 <table id="table_id4" class="display">
     <thead>
         <tr>
@@ -236,6 +242,7 @@ String userLogged = (String) session.getAttribute("userLogged");
       <% }%>
    </tbody>
 </table>
+</div>
 </div>
 </div>
 </body>

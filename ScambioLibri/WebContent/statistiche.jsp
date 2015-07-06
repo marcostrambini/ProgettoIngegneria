@@ -132,6 +132,7 @@ ResultSet rs = ds.getNumeroPossessi();
 <div class="row" >
 <div class="container">
 <h4>Possesso Libri</h4>
+<div class="table-responsive">
 <table id="table_id" class="display">
     <thead>
         <tr>
@@ -152,6 +153,7 @@ ResultSet rs = ds.getNumeroPossessi();
       <% }%>
    </tbody>
 </table>
+</div>
 </div>
 </div>
 
