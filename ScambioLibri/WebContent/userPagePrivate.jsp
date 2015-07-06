@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="it.univr.Tools.MyQuery"%>
+<%@page import="it.univr.Database.MyQuery"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="it.univr.Database.DataSource"%>
-<%@page import="it.univr.Tools.Utente"%>
-<%@page import="it.univr.Tools.Libro"%>
+<%@page import="it.univr.Entity.Utente"%>
+<%@page import="it.univr.Entity.Libro"%>
 
 
 <html>
@@ -16,9 +16,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta name="description" content="applicazione per lo scambio di libri tra utenti limitrofi ">
+<link rel="stylesheet" type="text/css" href="css/MyCss.css" />
 
-
-
+<%@include file="checkLogin.jsp" %>
 <%@include file="Master.jsp" %>
 
 <script type="text/javascript">
@@ -57,8 +57,18 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 	<div id="userBox"> 
 		<div id="logoUser"> 
 			<img src="img/user/user.png" class="logo"/>
-		</div>
-		
+	<div>
+				<span class="btn btn-default btn-file">
+   			 	carica img <input type="file">
+				</span>
+				</div>		
+       
+             
+  
+    
+	</div>
+
+	
 		<div id="infoUserBox"> 
 			<h3>Info Utente: </h3>
 			<br>
@@ -105,6 +115,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 				
 				<br>
 				
+			
 				<form class="form" action="BookServlet?act=md" method="post">
 				<table>
 				<tr>
@@ -143,6 +154,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 <div class="row">
 <div class="container">
 <h4>I miei libri</h4>
+<div class="table-responsive">
 <table id="table_id" class="display">
     <thead>
         <tr>
@@ -173,7 +185,7 @@ listaLibriUtente = (ArrayList<Libro>) request.getAttribute("listaLibriUtente");
 </table>
 
 
-
+</div>
 </div>
 </div>
 

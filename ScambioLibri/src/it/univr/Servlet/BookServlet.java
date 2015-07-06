@@ -1,8 +1,8 @@
 package it.univr.Servlet;
 
 import it.univr.Database.DataSource;
-import it.univr.Tools.Libro;
-import it.univr.Tools.Utente;
+import it.univr.Entity.Libro;
+import it.univr.Entity.Utente;
 
 import java.io.IOException;
 import java.util.ArrayList;

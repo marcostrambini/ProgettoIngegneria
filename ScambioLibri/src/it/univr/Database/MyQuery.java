@@ -1,4 +1,4 @@
-package it.univr.Tools;
+package it.univr.Database;
 
 public class MyQuery {
 
@@ -61,7 +61,11 @@ public class MyQuery {
 	public static String qSelUtentiLibro = " select u.* from ing_utente u join ing_possessolibro p "
 			  							 + " on u.email = p.email_utente join ing_libro l "
 			  							 + " on p.id_libro = l.id "
-			  							 + " where p.id_libro = ? and u.email <> ?";
+			  							 + " where p.id_libro = ? and u.email <> ? "
+			  							 + " and u.email not in "
+			  							 + " (select email_utente_mittente from ing_prestito where id_libro = ? and stato = 'A' "
+			  							 + " union "
+			  							 + " select email_utente_destinatario from ing_prestito where id_libro = ? and stato = 'A') ";
 	
 	public static String qSelUtente = " select * from ing_utente where email = ? ";
 	

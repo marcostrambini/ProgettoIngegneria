@@ -3,6 +3,8 @@ package it.univr.Tools;
 
 
 import it.univr.Database.DataSource;
+import it.univr.Database.MyQuery;
+import it.univr.Entity.Utente;
 import it.univr.Tools.*;
 
 import java.beans.Statement;

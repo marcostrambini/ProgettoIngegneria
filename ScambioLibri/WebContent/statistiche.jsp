@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="it.univr.Tools.MyQuery"%>
+<%@page import="it.univr.Database.MyQuery"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="it.univr.Database.DataSource"%>
-<%@page import="it.univr.Tools.Utente"%>
-<%@page import="it.univr.Tools.Libro"%>
-
+<%@page import="it.univr.Entity.Utente"%>
+<%@page import="it.univr.Entity.Libro"%>
+<%@include file="checkLogin.jsp" %>
 
 <html>
 <head>
@@ -26,6 +26,7 @@
 <script src="js/bootstrap.min.js"></script>
 
 <title>Book Sharing</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta name="description" content="applicazione per lo scambio di libri tra utenti limitrofi ">
@@ -103,7 +104,7 @@ ResultSet rs = ds.getNumeroPossessi();
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false"><%=userLogged %> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="index.html">logout</a></li>
+							<li><a href="index.jsp">logout</a></li>
 						</ul></li>
 				</ul>
 			</div>

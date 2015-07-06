@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="it.univr.Tools.MyQuery"%>
+<%@page import="it.univr.Database.MyQuery"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="it.univr.Database.DataSource"%>
-<%@page import="it.univr.Tools.Utente"%>
-<%@page import="it.univr.Tools.Libro"%>
+<%@page import="it.univr.Entity.Utente"%>
+<%@page import="it.univr.Entity.Libro"%>
 
 
 <html>
@@ -18,7 +18,7 @@
 <meta name="description" content="applicazione per lo scambio di libri tra utenti limitrofi ">
 
 
-
+<%@include file="checkLogin.jsp" %>
 <%@include file="Master.jsp" %>
 
 <script type="text/javascript">
@@ -140,7 +140,7 @@ utenteSelezionato = (Utente) session.getAttribute("utenteSelezionato");
     <tbody>
     
     
-<% for(int i=0; i<utente.getListaLibriUtente().size();i++){ %>
+<% for(int i=0; i<utenteSelezionato.getListaLibriUtente().size();i++){ %>
         <tr>
         	<td><a href="BookServlet?act=rp&idLibro=<%=utenteSelezionato.getListaLibriUtente().get(i).getId()%>&emailDest=<%=utenteSelezionato.getEmail() %>" ><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a> </td>
             <td><a href=<%=utenteSelezionato.getListaLibriUtente().get(i).getPath_img() %>><img alt="" src=<%=utenteSelezionato.getListaLibriUtente().get(i).getPath_img() %> height="150" width="100"></a></td>

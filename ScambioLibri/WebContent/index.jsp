@@ -1,5 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
@@ -22,7 +25,7 @@
           <h1 class="text-center">Book Sharing Project</h1>
       </div>
       <div class="modal-body">
-          <form class="form col-md-12 center-block" action="LoginServlet" method="POST">
+          <form class="form col-md-12 center-block" action="LoginServlet?act=l" method="POST">
             <div class="form-group">
               <input type="text" class="form-control input-lg" placeholder="Email" name="email">
             </div>
@@ -31,6 +34,8 @@
             </div>
             <div class="form-group">
               <button class="btn btn-primary btn-lg btn-block">Login</button>
+              <br>
+              <a class="btn btn-default" href="register.jsp?result=null" role="button">Registrati</a>
             
             </div>
           </form>

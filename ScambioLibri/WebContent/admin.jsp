@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="it.univr.Tools.MyQuery"%>
+<%@page import="it.univr.Database.MyQuery"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="it.univr.Database.DataSource"%>
-<%@page import="it.univr.Tools.Utente"%>
-<%@page import="it.univr.Tools.Libro"%>
+<%@page import="it.univr.Entity.Utente"%>
+<%@page import="it.univr.Entity.Libro"%>
 
 
 <html>
@@ -60,7 +60,7 @@ $(document).ready( function () {
 
 
 </script>
-
+<%@include file="checkLogin.jsp" %>
 
 
 </head>
@@ -106,7 +106,7 @@ String userLogged = (String) session.getAttribute("userLogged");
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false"><%=userLogged %> <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="index.html">logout</a></li>
+							<li><a href="logoff.jsp">logout</a></li>
 						</ul></li>
 				</ul>
 			</div>

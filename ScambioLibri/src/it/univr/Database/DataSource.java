@@ -1,11 +1,10 @@
 package it.univr.Database;
 
+import it.univr.Entity.Libro;
+import it.univr.Entity.Prestito;
+import it.univr.Entity.Utente;
 import it.univr.Tools.GeoTools;
-import it.univr.Tools.Libro;
-import it.univr.Tools.MyQuery;
-import it.univr.Tools.Prestito;
 import it.univr.Tools.Tools;
-import it.univr.Tools.Utente;
 
 import java.io.Serializable;
 import java.sql.Connection;
@@ -319,6 +318,8 @@ public class DataSource implements Serializable {
 		pstm = con.prepareStatement(MyQuery.qSelUtentiLibro);
 		pstm.setInt(1, idLibro);
 		pstm.setString(2, email);
+		pstm.setInt(3, idLibro);
+		pstm.setInt(4, idLibro);
 		rs = pstm.executeQuery();
 		while(rs.next())
 			result.add(makeUserBeanDistanza(rs, latitudine, longitudine));
@@ -1118,6 +1119,50 @@ public class DataSource implements Serializable {
 		}
 	}
 	   return result;
+   }
+   
+   /**
+    * registrazione utente
+    * @param nome
+    * @param cognome
+    * @param indirizzo
+    * @param email
+    * @param password
+    * @return
+    */
+   public boolean registerUser(String nome, String cognome, String indirizzo, String email, String password){
+	   Connection con = null;
+	   PreparedStatement pstm = null;
+	   boolean result = false;
+	   try {
+		   con = getConnection();
+		   pstm = con.prepareStatement(MyQuery.qInsertUtente);
+		   pstm.setString(1, nome);
+		   pstm.setString(2, cognome);
+		   pstm.setString(3, indirizzo); 
+		   pstm.setString(4, email);
+		   pstm.setString(5, password);
+		   pstm.setInt(6, GeoTools.getLatitudine());
+		   pstm.setInt(7, GeoTools.getLongitudine());
+		   pstm.setString(8, "A");
+		   pstm.execute();
+		   result = true;
+		   
+		   
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}finally{
+		try {
+			pstm.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	  return result;
+	   
    }
 	  
   /**

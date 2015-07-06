@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="it.univr.Tools.MyQuery"%>
+<%@page import="it.univr.Database.MyQuery"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="it.univr.Database.DataSource"%>
-<%@page import="it.univr.Tools.Utente"%>
-<%@page import="it.univr.Tools.Libro"%>
+<%@page import="it.univr.Entity.Utente"%>
+<%@page import="it.univr.Entity.Libro"%>
 
 
 <html>
@@ -17,7 +17,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta name="description" content="applicazione per lo scambio di libri tra utenti limitrofi ">
 
-
+<%@include file="checkLogin.jsp" %>
 <%@include file="Master.jsp" %>
 
 <script type="text/javascript">
