@@ -59,7 +59,7 @@ int idLibro = Integer.parseInt(request.getParameter("idLibro"));
 <table id="table_id" class="display">
     <thead>
         <tr>
-            <th>id</th>
+            <th></th>
             <th>Nome</th>
             <th>Cognome</th>
             <th>Email</th>

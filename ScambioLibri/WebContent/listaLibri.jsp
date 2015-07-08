@@ -58,7 +58,7 @@ ArrayList<Libro> listaLibri = ds.getListaLibri(utente.getEmail());
 <table id="table_id" class="display">
     <thead>
         <tr>
-            <th>id</th>
+            <th></th>
             <th>immagine libro</th>
             <th>titolo</th>
             <th>autore</th>

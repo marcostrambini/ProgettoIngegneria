@@ -18,9 +18,9 @@
 	content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta name="description"
 	content="applicazione per lo scambio di libri tra utenti limitrofi ">
+<link rel="stylesheet" type="text/css" href="css/MyCss.css" />
 
-
-<%@include file="checkLogin.jsp" %>
+<%@include file="checkLogin.jsp"%>
 <%@include file="Master.jsp"%>
 
 
@@ -31,14 +31,10 @@
 <body>
 
 	<%
-
-
-
-Utente utente = (Utente) session.getAttribute("utente");
-DataSource ds = new DataSource();
-ArrayList<String> categorie = ds.getCategorie();
-
-%>
+		Utente utente = (Utente) session.getAttribute("utente");
+		DataSource ds = new DataSource();
+		ArrayList<String> categorie = ds.getCategorie();
+	%>
 
 
 
@@ -72,20 +68,25 @@ ArrayList<String> categorie = ds.getCategorie();
 					<tr>
 						<td>Categoria</td>
 
-						<td>
-							
+						<td><select class="form-control" name="categoria"
+							id="single1">
+								<%
+									for (int i = 0; i < categorie.size(); i++) {
+								%>
+								<option><%=categorie.get(i)%></option>
+								<%
+									}
+								%>
 
-<select class="form-control" name="categoria"  id="single1">
-	<%for(int i=0;i<categorie.size();i++){ %>
-    <option ><%=categorie.get(i) %></option>
-    <%} %>
-   
-</select>
-						</td>
+						</select></td>
 
 					</tr>
 
-
+					<tr>
+						<td><span class="btn btn-default btn-file"> carica img
+								<input type="file">
+						</span></td>
+					</tr>
 
 				</table>
 
